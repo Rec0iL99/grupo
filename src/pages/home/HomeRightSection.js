@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Flex, Link, Stack, Text } from '@chakra-ui/react';
+import { Flex, Link, Stack, Text, Spinner } from '@chakra-ui/react';
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 
-const HomeRightSection = () => {
+const HomeRightSection = (props) => {
   const [signUpReq, setSignUpReq] = useState(false);
 
   const getAuthData = (authData) => {
-    console.log(authData);
+    props.sendLoginRequest(authData);
   };
 
   let content = (
@@ -62,6 +62,23 @@ const HomeRightSection = () => {
               Login now!
             </Link>
           </Text>
+        </Stack>
+      </Flex>
+    );
+  }
+
+  if (props.loginLoading) {
+    content = (
+      <Flex
+        bg='white'
+        w='50%'
+        h='100vh'
+        justifyContent='center'
+        alignItems='center'
+      >
+        <Stack align='center'>
+          <Spinner color='teal' />
+          <Text fontSize='md'>Logging you in!</Text>
         </Stack>
       </Flex>
     );
