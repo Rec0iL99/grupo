@@ -2,7 +2,7 @@ import React from 'react';
 import GoogleLogin from 'react-google-login';
 import { Icon } from '@chakra-ui/react';
 import { IoLogoGoogle } from 'react-icons/io';
-import './GoogleAuth.css';
+import './GoogleAuth.scss';
 
 const GoogleAuth = (props) => {
   const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
