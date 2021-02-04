@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flex, Image } from '@chakra-ui/react';
-import image from '../../assets/homeCharacter.svg';
+import homeCharacter from '../../assets/homeCharacter.svg';
 
 const HomeLeftSection = () => {
   return (
@@ -11,7 +11,7 @@ const HomeLeftSection = () => {
       justifyContent='center'
       alignItems='center'
     >
-      <Image src={image} alt='character' boxSize='250px' />
+      <Image src={homeCharacter} alt='character' boxSize='250px' />
     </Flex>
   );
 };
