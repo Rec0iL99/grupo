@@ -1,8 +1,11 @@
 import React from 'react';
 import { Flex, Link, Stack, Text, Spinner } from '@chakra-ui/react';
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
+import { useHistory } from 'react-router-dom';
 
 const SignupRightSection = (props) => {
+  const history = useHistory();
+
   // Function that's called once GoogleAuth passes authData
   const getAuthData = (authData) => {
     props.sendSignupRequest(authData);
@@ -25,7 +28,7 @@ const SignupRightSection = (props) => {
         <GoogleAuth text='Sign up with Google' getAuthData={getAuthData} />
         <Text fontSize='sm'>
           Already have a account{' '}
-          <Link onClick={() => console.log('works')}>Login now!</Link>
+          <Link onClick={() => history.push('/login')}>Login now!</Link>
         </Text>
       </Stack>
     </Flex>
