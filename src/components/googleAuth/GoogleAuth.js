@@ -10,9 +10,9 @@ const GoogleAuth = (props) => {
   // Function that runs once GoogleLogin sends positive response
   const responseSuccess = (response) => {
     const authData = {
-      access_token: response.tokenObj.id_token,
+      accessToken: response.tokenObj.id_token,
       issuer: 'google',
-      signUpType: 'OAuth',
+      signupType: 'OAuth',
     };
 
     props.getAuthData(authData);
