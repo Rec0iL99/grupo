@@ -2,6 +2,9 @@ import {
   LOGIN_LOADING,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  SIGNUP_LOADING,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAIL,
   ACTION_RESET,
 } from './types';
 import axiosInstance from '../helpers/axiosInstance';
@@ -37,6 +40,26 @@ export const loginUser = (authData) => (dispatch) => {
     .catch((error) => {
       dispatch({
         type: LOGIN_FAIL,
+        payload: error.response ? error.response.data : SERVER_DOWN,
+      });
+    });
+};
+
+// Action for user signup
+export const signupUser = (authData) => (dispatch) => {
+  dispatch({ type: SIGNUP_LOADING });
+
+  axiosInstance
+    .post('/users/signup', authData)
+    .then((response) => {
+      dispatch({
+        type: SIGNUP_SUCCESS,
+        payload: response.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: SIGNUP_FAIL,
         payload: error.response ? error.response.data : SERVER_DOWN,
       });
     });

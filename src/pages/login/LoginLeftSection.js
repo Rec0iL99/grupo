@@ -2,7 +2,7 @@ import React from 'react';
 import { Flex, Image } from '@chakra-ui/react';
 import homeCharacter from '../../assets/homeCharacter.svg';
 
-const HomeLeftSection = () => {
+const LoginLeftSection = () => {
   return (
     <Flex
       bg='teal'
@@ -16,4 +16,4 @@ const HomeLeftSection = () => {
   );
 };
 
-export default HomeLeftSection;
+export default LoginLeftSection;
