@@ -8,6 +8,7 @@ import {
 import routes from './routes';
 import { Provider } from 'react-redux';
 import store from './store';
+import isAuthenticated from './utils/isAuthenticated';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Chat from './pages/chat/Chat';
@@ -24,6 +25,18 @@ const RenderRoute = (route) => {
 
   // Setting titles for all pages
   document.title = route.title || 'Grupo';
+
+  // If route needs auth and if user is not authenticated then prompt user to login
+  if (route.needsAuth && !isAuthenticated()) {
+    history.push('/login');
+  }
+
+  // If user visits login even after login then push user to main chat page
+  if (route.component === 'Login' && isAuthenticated()) {
+    history.push('/');
+  } else if (route.component === 'Signup' && isAuthenticated()) {
+    history.push('/');
+  }
 
   return (
     <Route

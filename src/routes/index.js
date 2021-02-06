@@ -19,13 +19,13 @@ const routes = [
     path: '',
     component: 'Chat',
     title: 'Grupo',
-    needsAuth: false,
+    needsAuth: true,
   },
   {
     path: '/',
     component: 'Chat',
     title: 'Grupo',
-    needsAuth: false,
+    needsAuth: true,
   },
 ];
 
