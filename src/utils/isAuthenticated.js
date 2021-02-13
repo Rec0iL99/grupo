@@ -1,4 +1,4 @@
-// Functions that checks if the client has a accessToken or not
+// Function that checks if the client has a accessToken or not
 const isAuthenticated = () => {
   if (localStorage.token) {
     return true;

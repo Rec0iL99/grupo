@@ -17,13 +17,13 @@ const routes = [
   },
   {
     path: '',
-    component: 'Chat',
+    component: 'Room',
     title: 'Grupo',
     needsAuth: true,
   },
   {
     path: '/',
-    component: 'Chat',
+    component: 'Room',
     title: 'Grupo',
     needsAuth: true,
   },

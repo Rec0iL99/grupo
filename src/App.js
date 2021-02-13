@@ -11,13 +11,13 @@ import store from './store';
 import isAuthenticated from './utils/isAuthenticated';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
-import Chat from './pages/chat/Chat';
+import Room from './pages/room/Room';
 import './App.scss';
 
 const componentRegistry = {
   Login,
   Signup,
-  Chat,
+  Room,
 };
 
 const RenderRoute = (route) => {

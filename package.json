@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "framer-motion": "^3.2.2-rc.1",
+    "jsonwebtoken": "^8.5.1",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -22,6 +23,7 @@
     "react-scripts": "4.0.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "socket.io-client": "^3.1.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
