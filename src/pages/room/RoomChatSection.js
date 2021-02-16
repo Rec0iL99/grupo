@@ -1,8 +1,35 @@
 import React from 'react';
-import { Flex } from '@chakra-ui/react';
+import { Flex, InputGroup, Input, Stack } from '@chakra-ui/react';
+import RoomChatBubble from '../../components/roomChatBubble/RoomChatBubble';
 
 const RoomChatSection = () => {
-  return <Flex bg='#e6f2f2' w='50%' h='100vh'></Flex>;
+  return (
+    <Flex
+      as='div'
+      pos='relative'
+      bg='#e6f2f2'
+      w='50%'
+      h='100vh'
+      flexDirection='column'
+      paddingLeft='10px'
+      paddingRight='10px'
+      paddingBottom='10px'
+    >
+      <Stack>
+        <RoomChatBubble />
+        <RoomChatBubble />
+      </Stack>
+      <InputGroup
+        size='md'
+        pos='absolute'
+        bottom='0'
+        left='0'
+        padding='inherit'
+      >
+        <Input pr='4.5rem' bg='white' placeholder='Message' />
+      </InputGroup>
+    </Flex>
+  );
 };
 
 export default RoomChatSection;
