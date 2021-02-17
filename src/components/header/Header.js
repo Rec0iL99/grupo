@@ -8,7 +8,8 @@ const Header = (props) => {
       align='center'
       justify='space-between'
       wrap='wrap'
-      padding='1.5rem'
+      // padding='1rem'
+      width='5%'
       bg='teal'
       color='white'
       {...props}
