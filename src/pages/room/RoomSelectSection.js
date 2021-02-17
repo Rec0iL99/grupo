@@ -1,9 +1,25 @@
 import React from 'react';
-import { Button, Flex, InputGroup, Stack } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  InputGroup,
+  Stack,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Input,
+} from '@chakra-ui/react';
 import { IoIosAddCircle } from 'react-icons/io';
 import RoomCard from '../../components/roomCard/RoomCard';
+import { useDisclosure } from '@chakra-ui/react';
 
 const RoomSelectSection = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Flex
       as='div'
@@ -32,9 +48,29 @@ const RoomSelectSection = () => {
           variant='outline'
           marginTop='10px'
           isFullWidth={true}
+          onClick={onOpen}
         >
           Add a Room
         </Button>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Create a new room</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Input variant='filled' placeholder='Room name' />
+            </ModalBody>
+
+            <ModalFooter>
+              <Button colorScheme='teal' mr={3}>
+                Create room
+              </Button>
+              <Button variant='ghost' onClick={onClose}>
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
       </InputGroup>
     </Flex>
   );

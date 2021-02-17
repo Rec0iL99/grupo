@@ -27,7 +27,7 @@ const RoomChatSection = () => {
         borderColor='teal'
         padding='inherit'
       >
-        <Input pr='4.5rem' bg='white' placeholder='Message' />
+        <Input pr='4.5rem' placeholder='Message' />
       </InputGroup>
     </Flex>
   );
