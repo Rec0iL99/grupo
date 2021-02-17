@@ -1,6 +1,7 @@
 import React from 'react';
-import { Flex, Heading, Image } from '@chakra-ui/react';
+import { Flex, Image, Stack } from '@chakra-ui/react';
 import grupoLogo from '../../assets/grupoLogo.svg';
+import UserProfileButton from '../userProfileButton/UserProfileButton';
 
 const Header = (props) => {
   return (
@@ -10,12 +11,16 @@ const Header = (props) => {
       wrap='wrap'
       width='5%'
       bg='teal'
-      color='white'
       {...props}
     >
-      <Flex marginTop='10px'>
+      <Stack
+        marginTop='10px'
+        marginBottom='10px'
+        justifyContent='space-between'
+      >
         <Image boxSize='45px' objectFit='cover' src={grupoLogo} alt='Grupo' />
-      </Flex>
+        <UserProfileButton />
+      </Stack>
     </Flex>
   );
 };

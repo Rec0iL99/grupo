@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Avatar, AvatarBadge, Text, Stack } from '@chakra-ui/react';
+import { Flex, Avatar, AvatarBadge, Text } from '@chakra-ui/react';
 
 const RoomMemberCard = ({ firstName, lastName, username, profilePic }) => {
   return (
