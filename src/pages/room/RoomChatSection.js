@@ -7,7 +7,7 @@ const RoomChatSection = () => {
     <Flex
       as='div'
       pos='relative'
-      bg='#e6f2f2'
+      bg='#F6F8FA'
       w='50%'
       h='100vh'
       flexDirection='column'
@@ -24,6 +24,7 @@ const RoomChatSection = () => {
         pos='absolute'
         bottom='0'
         left='0'
+        borderColor='teal'
         padding='inherit'
       >
         <Input pr='4.5rem' bg='white' placeholder='Message' />

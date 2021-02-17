@@ -8,7 +8,7 @@ const RoomSelectSection = () => {
     <Flex
       as='div'
       pos='relative'
-      bg='white'
+      bg='#66b2b2'
       w='25%'
       h='100vh'
       direction='column'
@@ -27,6 +27,7 @@ const RoomSelectSection = () => {
       >
         <Button
           rightIcon={<IoIosAddCircle color='teal' />}
+          bg='white'
           colorScheme='teal'
           variant='outline'
           marginTop='10px'

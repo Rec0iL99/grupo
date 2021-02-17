@@ -4,7 +4,7 @@ import RoomMemberCard from '../../components/roomMemberCard/RoomMemberCard';
 
 const RoomMemberSection = () => {
   return (
-    <Stack bg='teal' w='25%' h='100vh' padding='10px'>
+    <Stack bg='white' w='25%' h='100vh' padding='10px'>
       <Stack>
         <Heading fontSize='md'>Online</Heading>
         <RoomMemberCard />
