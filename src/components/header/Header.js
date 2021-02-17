@@ -1,23 +1,20 @@
 import React from 'react';
-import { Flex, Heading } from '@chakra-ui/react';
+import { Flex, Heading, Image } from '@chakra-ui/react';
+import grupoLogo from '../../assets/grupoLogo.svg';
 
 const Header = (props) => {
   return (
     <Flex
       as='nav'
-      align='center'
-      justify='space-between'
+      justifyContent='center'
       wrap='wrap'
-      // padding='1rem'
       width='5%'
       bg='teal'
       color='white'
       {...props}
     >
-      <Flex align='center' mr={5}>
-        <Heading as='h1' size='lg' letterSpacing={'-.1rem'}>
-          Grupo
-        </Heading>
+      <Flex marginTop='10px'>
+        <Image boxSize='45px' objectFit='cover' src={grupoLogo} alt='Grupo' />
       </Flex>
     </Flex>
   );
