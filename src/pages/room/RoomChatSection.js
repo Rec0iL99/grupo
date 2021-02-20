@@ -1,6 +1,7 @@
 import React from 'react';
 import { Flex, InputGroup, Input, Stack } from '@chakra-ui/react';
 import RoomChatBubble from '../../components/roomChatBubble/RoomChatBubble';
+import RoomAlert from '../../components/roomAlert/RoomAlert';
 
 const RoomChatSection = () => {
   return (
@@ -18,6 +19,7 @@ const RoomChatSection = () => {
       <Stack>
         <RoomChatBubble />
         <RoomChatBubble />
+        <RoomAlert />
       </Stack>
       <InputGroup
         size='md'
