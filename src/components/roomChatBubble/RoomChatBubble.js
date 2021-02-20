@@ -10,7 +10,12 @@ const RoomChatBubble = ({
   timeOfMessage,
 }) => {
   return (
-    <Flex alignItems='center' marginTop='16px'>
+    <Flex
+      alignItems='center'
+      marginTop='16px'
+      _hover={{ bg: '#e3e6e8' }}
+      transition='0.3s'
+    >
       <Avatar src='https://bit.ly/dan-abramov' size='sm' />
       <Stack marginLeft='13px'>
         <Flex>

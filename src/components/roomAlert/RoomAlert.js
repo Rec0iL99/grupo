@@ -4,7 +4,14 @@ import { AiOutlineArrowRight, AiOutlineCloseCircle } from 'react-icons/ai';
 
 const RoomAlert = ({ text, username, type }) => {
   return (
-    <Flex marginTop='16px' justifyContent='center' alignItems='center'>
+    <Flex
+      marginTop='16px'
+      justifyContent='center'
+      alignItems='center'
+      padding='5px'
+      _hover={{ bg: '#e3e6e8' }}
+      transition='0.3s'
+    >
       <Text fontSize='sm'>Rec0iL joined the server</Text>
       <Icon
         as={AiOutlineArrowRight}
