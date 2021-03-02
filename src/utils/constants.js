@@ -20,14 +20,14 @@ export const SERVER_DOWN =
   'Some error occurred, our team is in the process of fixing it!';
 
 // Socket Client Action constants
-export const SOCKET_CLIENT_ACTIONS = {
+export const socketClientActions = {
   CLIENT_CONNECTION: 'CLIENT_CONNECTION',
   CLIENT_CREATE_ROOM: 'CLIENT_CREATE_ROOM',
   CLIENT_ROOM_MESSAGE: 'CLIENT_ROOM_MESSAGE',
 };
 
 // Socket Server Action constants
-export const SOCKET_SERVER_ACTIONS = {
+export const socketServerActions = {
   SERVER_JOIN_ROOM: 'SERVER_JOIN_ROOM',
   SERVER_ROOM_MESSAGE: 'SERVER_ROOM_MESSAGE',
 };

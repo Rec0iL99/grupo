@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Flex,
@@ -17,8 +17,14 @@ import { IoIosAddCircle } from 'react-icons/io';
 import RoomCard from '../../components/roomCard/RoomCard';
 import { useDisclosure } from '@chakra-ui/react';
 
-const RoomSelectSection = () => {
+const RoomSelectSection = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [roomName, setRoomName] = useState('');
+
+  const handleCreateRoom = () => {
+    props.sendCreateRoomRequest(roomName);
+    onClose();
+  };
 
   return (
     <Flex
@@ -58,11 +64,15 @@ const RoomSelectSection = () => {
             <ModalHeader>Create a new room</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Input variant='filled' placeholder='Room name' />
+              <Input
+                variant='filled'
+                placeholder='Room name'
+                onChange={(e) => setRoomName(e.target.value)}
+              />
             </ModalBody>
 
             <ModalFooter>
-              <Button colorScheme='teal' mr={3}>
+              <Button colorScheme='teal' mr={3} onClick={handleCreateRoom}>
                 Create room
               </Button>
               <Button variant='ghost' onClick={onClose}>

@@ -12,5 +12,10 @@ export const SIGNUP_FAIL = 'SIGNUP_FAIL';
 export const SOCKET_CONN_SUCCESS = 'SOCKET_CONN_SUCCESS';
 export const SOCKET_CONN_FAIL = 'SOCKET_CONN_FAIL';
 
+// Room Actions
+export const CREATE_ROOM_LOADING = 'CREATE_ROOM_LOADING';
+export const CREATE_ROOM_SUCCESS = 'CREATE_ROOM_SUCCESS';
+export const CREATE_ROOM_FAIL = 'CREATE_ROOM_FAIL';
+
 // Reset Action
 export const ACTION_RESET = 'ACTION_RESET';
