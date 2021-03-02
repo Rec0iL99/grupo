@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import RoomSelectSection from './RoomSelectSection';
 import RoomChatSection from './RoomChatSection';
 import RoomMemberSection from './RoomMemberSection';
 import Header from '../../components/header/Header';
 import { Flex } from '@chakra-ui/react';
+import { connectToSocketServer } from '../../actions/socketActions';
+import { connect } from 'react-redux';
 
-const Room = () => {
+const Room = ({ connectToSocketServer }) => {
+  useEffect(() => {
+    connectToSocketServer();
+  });
+
   return (
     <Flex>
       <Header />
@@ -16,4 +22,8 @@ const Room = () => {
   );
 };
 
-export default Room;
+const mapStateToProps = (state) => ({
+  userData: state.userData,
+});
+
+export default connect(mapStateToProps, { connectToSocketServer })(Room);
