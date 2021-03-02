@@ -1,29 +1,13 @@
-import React, { useState } from 'react';
-import {
-  Button,
-  Flex,
-  InputGroup,
-  Stack,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Input,
-} from '@chakra-ui/react';
-import { IoIosAddCircle } from 'react-icons/io';
+import React from 'react';
+import { Flex, InputGroup, Stack } from '@chakra-ui/react';
 import RoomCard from '../../components/roomCard/RoomCard';
-import { useDisclosure } from '@chakra-ui/react';
+import CustomModal from '../../components/customModal/CustomModal';
+import { IoIosAddCircle } from 'react-icons/io';
+import { GiJoint } from 'react-icons/gi';
 
 const RoomSelectSection = (props) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [roomName, setRoomName] = useState('');
-
-  const handleCreateRoom = () => {
-    props.sendCreateRoomRequest(roomName);
-    onClose();
+  const handleModalData = (data) => {
+    props.sendCreateRoomRequest(data);
   };
 
   return (
@@ -47,40 +31,24 @@ const RoomSelectSection = (props) => {
         left='0'
         padding='inherit'
       >
-        <Button
-          rightIcon={<IoIosAddCircle color='teal' />}
-          bg='white'
-          colorScheme='teal'
-          variant='outline'
-          marginTop='10px'
-          isFullWidth={true}
-          onClick={onOpen}
-        >
-          Add a Room
-        </Button>
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Create a new room</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Input
-                variant='filled'
-                placeholder='Room name'
-                onChange={(e) => setRoomName(e.target.value)}
-              />
-            </ModalBody>
-
-            <ModalFooter>
-              <Button colorScheme='teal' mr={3} onClick={handleCreateRoom}>
-                Create room
-              </Button>
-              <Button variant='ghost' onClick={onClose}>
-                Close
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+        <Stack w='100%'>
+          <CustomModal
+            buttonText='Join a room'
+            buttonIcon={<GiJoint color='teal' />}
+            modalHeaderText='Join a new room'
+            inputPlaceholder='Room code'
+            actionButtonText='Join room'
+            getModalData={handleModalData}
+          />
+          <CustomModal
+            buttonText='Add a room'
+            buttonIcon={<IoIosAddCircle color='teal' />}
+            modalHeaderText='Create a new room'
+            inputPlaceholder='Room name'
+            actionButtonText='Create room'
+            getModalData={handleModalData}
+          />
+        </Stack>
       </InputGroup>
     </Flex>
   );
