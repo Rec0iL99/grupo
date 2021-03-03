@@ -21,10 +21,24 @@ const SelectedRoom = () => {
     },
   ];
 
+  // For Testing
+  const roomMembersArray = [
+    {
+      username: 'joelmathew',
+      profilePic: 'https://bit.ly/dan-abramov',
+      online: true,
+    },
+    {
+      username: 'alanhenry',
+      profilePic: 'https://bit.ly/dan-abramov',
+      online: false,
+    },
+  ];
+
   return (
     <Flex w='75%' h='100vh'>
       <RoomChatSection roomMessages={roomMessageArray} />
-      <RoomMemberSection />
+      <RoomMemberSection roomMembers={roomMembersArray} />
     </Flex>
   );
 };

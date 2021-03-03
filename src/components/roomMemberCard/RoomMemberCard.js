@@ -1,14 +1,14 @@
 import React from 'react';
 import { Flex, Avatar, AvatarBadge, Text } from '@chakra-ui/react';
 
-const RoomMemberCard = ({ firstName, lastName, username, profilePic }) => {
+const RoomMemberCard = ({ username, profilePic, online }) => {
   return (
     <Flex margin='5px'>
-      <Avatar size='sm' src='https://bit.ly/dan-abramov'>
-        <AvatarBadge boxSize='0.9em' bg='green.500' />
+      <Avatar size='sm' src={profilePic}>
+        <AvatarBadge boxSize='0.9em' bg={online ? 'teal' : 'gray.500'} />
       </Avatar>
       <Text marginLeft='10px' fontWeight='600'>
-        joelmathewkoshy
+        {username}
       </Text>
     </Flex>
   );
