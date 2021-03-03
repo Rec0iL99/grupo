@@ -6,8 +6,12 @@ import { IoIosAddCircle } from 'react-icons/io';
 import { GiJoint } from 'react-icons/gi';
 
 const RoomSelectSection = (props) => {
-  const handleModalData = (data) => {
+  const handleCreateRoomModalData = (data) => {
     props.sendCreateRoomRequest(data);
+  };
+
+  const handleJoinRoomModalData = (data) => {
+    props.sendJoinRoomRequest(data);
   };
 
   return (
@@ -38,7 +42,7 @@ const RoomSelectSection = (props) => {
             modalHeaderText='Join a new room'
             inputPlaceholder='Room code'
             actionButtonText='Join room'
-            getModalData={handleModalData}
+            getModalData={handleJoinRoomModalData}
           />
           <CustomModal
             buttonText='Add a room'
@@ -46,7 +50,7 @@ const RoomSelectSection = (props) => {
             modalHeaderText='Create a new room'
             inputPlaceholder='Room name'
             actionButtonText='Create room'
-            getModalData={handleModalData}
+            getModalData={handleCreateRoomModalData}
           />
         </Stack>
       </InputGroup>
