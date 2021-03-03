@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import RoomSelectSection from './RoomSelectSection';
-import RoomChatSection from './RoomChatSection';
-import RoomMemberSection from './RoomMemberSection';
 import Header from '../../components/header/Header';
 import { Flex } from '@chakra-ui/react';
 import { connectToSocketServer } from '../../actions/socketActions';
 import { createRoom, joinRoom } from '../../actions/roomActions';
 import { connect } from 'react-redux';
 import getUserData from '../../utils/getUserData';
+import SelectedRoom from './SelectedRoom';
 
 const Room = ({ socketData, createRoom, joinRoom, connectToSocketServer }) => {
   const socket = socketData.socket;
@@ -32,8 +31,7 @@ const Room = ({ socketData, createRoom, joinRoom, connectToSocketServer }) => {
         sendCreateRoomRequest={handleCreateRoom}
         sendJoinRoomRequest={handleJoinRoom}
       />
-      <RoomChatSection />
-      <RoomMemberSection />
+      <SelectedRoom />
     </Flex>
   );
 };

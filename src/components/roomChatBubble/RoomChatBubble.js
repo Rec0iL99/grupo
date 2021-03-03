@@ -2,8 +2,8 @@ import React from 'react';
 import { Flex, Avatar, Text, Stack } from '@chakra-ui/react';
 
 const RoomChatBubble = ({
-  firstName,
-  lastName,
+  firstname,
+  lastname,
   username,
   profilePic,
   chatMessage,
@@ -16,23 +16,20 @@ const RoomChatBubble = ({
       _hover={{ bg: '#e3e6e8' }}
       transition='0.3s'
     >
-      <Avatar src='https://bit.ly/dan-abramov' size='sm' />
+      <Avatar src={profilePic} size='sm' />
       <Stack marginLeft='13px'>
         <Flex>
           <Text fontSize='sm' fontWeight='bold'>
-            Joel Mathew
+            {firstname} {lastname}
           </Text>
           <Text fontSize='sm' marginLeft='5px'>
-            @joelmathewkoshy
+            @{username}
           </Text>
           <Text fontSize='sm' marginLeft='5px'>
-            Jan 25 22:47
+            {timeOfMessage}
           </Text>
         </Flex>
-        <Text fontSize='sm'>
-          Hola Amigos!
-          Wassupasdasdabsdjkbaksdbbdajbsdjabsdjabsjdbakjsdbaksbdkabsdkjabsdkabksdbaksbdakb
-        </Text>
+        <Text fontSize='sm'>{chatMessage}</Text>
       </Stack>
     </Flex>
   );
