@@ -14,6 +14,10 @@ const RoomSelectSection = (props) => {
     props.sendJoinRoomRequest(data);
   };
 
+  const handleRoomSelected = (data) => {
+    props.sendRoomSelectedRequest(data);
+  };
+
   return (
     <Flex
       as='div'
@@ -25,8 +29,8 @@ const RoomSelectSection = (props) => {
       padding='10px'
     >
       <Stack>
-        <RoomCard roomName='CodeRoyale' />
-        <RoomCard roomName='CodeRoyale' />
+        <RoomCard roomName='CodeRoyale' roomSelected={handleRoomSelected} />
+        <RoomCard roomName='Grupo' roomSelected={handleRoomSelected} />
       </Stack>
       <InputGroup
         size='md'
