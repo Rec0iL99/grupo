@@ -8,7 +8,13 @@ import { connect } from 'react-redux';
 import getUserData from '../../utils/getUserData';
 import SelectedRoom from './SelectedRoom';
 
-const Room = ({ socketData, createRoom, joinRoom, connectToSocketServer }) => {
+const Room = ({
+  socketData,
+  roomData,
+  createRoom,
+  joinRoom,
+  connectToSocketServer,
+}) => {
   const socket = socketData.socket;
   const username = getUserData().username;
 
@@ -116,6 +122,7 @@ const Room = ({ socketData, createRoom, joinRoom, connectToSocketServer }) => {
     <Flex>
       <Header />
       <RoomSelectSection
+        rooms={roomData.rooms}
         sendCreateRoomRequest={handleCreateRoom}
         sendJoinRoomRequest={handleJoinRoom}
         sendRoomSelectedRequest={handleRoomSelected}
@@ -130,6 +137,7 @@ const Room = ({ socketData, createRoom, joinRoom, connectToSocketServer }) => {
 
 const mapStateToProps = (state) => ({
   socketData: state.socketData,
+  roomData: state.roomData,
 });
 
 export default connect(mapStateToProps, {

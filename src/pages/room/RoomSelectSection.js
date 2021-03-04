@@ -6,17 +6,38 @@ import { IoIosAddCircle } from 'react-icons/io';
 import { GiJoint } from 'react-icons/gi';
 
 const RoomSelectSection = (props) => {
+  const {
+    rooms,
+    sendCreateRoomRequest,
+    sendJoinRoomRequest,
+    sendRoomSelectedRequest,
+  } = props;
+
   const handleCreateRoomModalData = (data) => {
-    props.sendCreateRoomRequest(data);
+    sendCreateRoomRequest(data);
   };
 
   const handleJoinRoomModalData = (data) => {
-    props.sendJoinRoomRequest(data);
+    sendJoinRoomRequest(data);
   };
 
   const handleRoomSelected = (data) => {
-    props.sendRoomSelectedRequest(data);
+    sendRoomSelectedRequest(data);
   };
+
+  let roomCards = null;
+
+  if (rooms !== undefined) {
+    roomCards = Object.keys(rooms).map((item, index) => {
+      return (
+        <RoomCard
+          key={index}
+          roomName={rooms[item].config.roomName}
+          roomSelected={handleRoomSelected}
+        />
+      );
+    });
+  }
 
   return (
     <Flex
@@ -28,10 +49,7 @@ const RoomSelectSection = (props) => {
       direction='column'
       padding='10px'
     >
-      <Stack>
-        <RoomCard roomName='CodeRoyale' roomSelected={handleRoomSelected} />
-        <RoomCard roomName='Grupo' roomSelected={handleRoomSelected} />
-      </Stack>
+      <Stack>{roomCards}</Stack>
       <InputGroup
         size='md'
         pos='absolute'
