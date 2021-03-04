@@ -1,5 +1,10 @@
 import { socketClientActions } from '../utils/constants';
-import { CREATE_ROOM_LOADING, JOIN_ROOM_LOADING } from './types';
+import {
+  CREATE_ROOM_LOADING,
+  CREATE_ROOM_SUCCESS,
+  CREATE_ROOM_FAIL,
+  JOIN_ROOM_LOADING,
+} from './types';
 
 export const createRoom = (socket, roomName, username) => (dispatch) => {
   dispatch({
@@ -9,8 +14,12 @@ export const createRoom = (socket, roomName, username) => (dispatch) => {
     socketClientActions.CLIENT_CREATE_ROOM,
     roomName,
     username,
-    (data) => {
-      console.log(data);
+    (roomData) => {
+      if (roomData) {
+        dispatch({ type: CREATE_ROOM_SUCCESS, payload: roomData });
+      } else {
+        dispatch({ type: CREATE_ROOM_FAIL });
+      }
     }
   );
 };

@@ -97,7 +97,7 @@ const Room = ({ socketData, createRoom, joinRoom, connectToSocketServer }) => {
   );
 
   useEffect(() => {
-    // connectToSocketServer();
+    connectToSocketServer();
   }, [connectToSocketServer]);
 
   const handleCreateRoom = (roomName) => {
