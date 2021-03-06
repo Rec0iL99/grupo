@@ -3,7 +3,13 @@ import { Flex } from '@chakra-ui/react';
 import RoomChatSection from './RoomChatSection';
 import RoomMemberSection from './RoomMemberSection';
 
-const SelectedRoom = ({ roomMessageArray, roomMembersArray }) => {
+const SelectedRoom = (props) => {
+  const {
+    roomName,
+    roomMessageArray,
+    roomMembersArray,
+    sendChatMessageRequest,
+  } = props;
   // // For testing
   // const roomMessageArray = [
   //   {
@@ -35,9 +41,20 @@ const SelectedRoom = ({ roomMessageArray, roomMembersArray }) => {
   //   },
   // ];
 
+  const handleSendChatMessage = (chatMessage) => {
+    const data = {
+      chatMessage: chatMessage,
+      roomName: roomName,
+    };
+    sendChatMessageRequest(data);
+  };
+
   return (
     <Flex w='75%' h='100vh'>
-      <RoomChatSection roomMessages={roomMessageArray} />
+      <RoomChatSection
+        roomMessages={roomMessageArray}
+        sendChatMessageRequest={handleSendChatMessage}
+      />
       <RoomMemberSection roomMembers={roomMembersArray} />
     </Flex>
   );

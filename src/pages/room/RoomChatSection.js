@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Flex, InputGroup, Input, Stack } from '@chakra-ui/react';
 import RoomChatBubble from '../../components/roomChatBubble/RoomChatBubble';
 import RoomAlert from '../../components/roomAlert/RoomAlert';
 
-const RoomChatSection = ({ roomMessages }) => {
+const RoomChatSection = (props) => {
+  const { roomMessages, sendChatMessageRequest } = props;
+  const [chatMessage, setChatMessage] = useState('');
   let roomChatCards = null;
 
   let roomMessageArray = roomMessages;
@@ -28,6 +30,13 @@ const RoomChatSection = ({ roomMessages }) => {
     });
   }
 
+  const handleChatInputKeyPressed = (event) => {
+    if (event.key === 'Enter') {
+      sendChatMessageRequest(event.target.value);
+      setChatMessage('');
+    }
+  };
+
   return (
     <Flex
       as='div'
@@ -51,7 +60,13 @@ const RoomChatSection = ({ roomMessages }) => {
         borderColor='teal'
         padding='inherit'
       >
-        <Input pr='4.5rem' placeholder='Message' />
+        <Input
+          pr='4.5rem'
+          placeholder='Message'
+          value={chatMessage}
+          onChange={(e) => setChatMessage(e.target.value)}
+          onKeyPress={handleChatInputKeyPressed}
+        />
       </InputGroup>
     </Flex>
   );

@@ -28,11 +28,11 @@ const RoomSelectSection = (props) => {
   let roomCards = null;
 
   if (rooms !== undefined) {
-    roomCards = Object.keys(rooms).map((item, index) => {
+    roomCards = Object.keys(rooms).map((roomName, index) => {
       return (
         <RoomCard
           key={index}
-          roomName={rooms[item].config.roomName}
+          roomName={roomName}
           roomSelected={handleRoomSelected}
         />
       );

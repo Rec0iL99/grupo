@@ -3,7 +3,9 @@ import {
   CREATE_ROOM_LOADING,
   CREATE_ROOM_SUCCESS,
   CREATE_ROOM_FAIL,
+  JOIN_ROOM_SUCCESS,
   JOIN_ROOM_LOADING,
+  ROOM_MESSAGE,
 } from './types';
 
 export const createRoom = (socket, roomName, username) => (dispatch) => {
@@ -38,4 +40,28 @@ export const joinRoom = (socket, roomCode, username) => (dispatch) => {
   );
 };
 
-export const sendRoomMessage = () => {};
+export const sendRoomChatMessage = (
+  socket,
+  roomName,
+  username,
+  chatMessage
+) => (dispatch) => {
+  console.log(roomName, chatMessage);
+  socket.emit(
+    socketClientActions.CLIENT_ROOM_MESSAGE,
+    roomName,
+    username,
+    chatMessage,
+    (roomMessage) => {
+      console.log(roomMessage);
+      if (roomMessage) {
+        dispatch({
+          type: ROOM_MESSAGE,
+          payload: roomMessage,
+        });
+      }
+    }
+  );
+};
+
+export const receiveRoomChatMessage = (socket) => (dispatch) => {};
