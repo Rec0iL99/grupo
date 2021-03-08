@@ -24,48 +24,6 @@ const Room = ({
   const username = getUserData().username;
 
   // For testing
-  const roomMessageData = {
-    CodeRoyale: [
-      {
-        type: 'room-chat-message',
-        username: 'joelmathew',
-        firstname: 'Joel',
-        lastname: 'Mathew',
-        profilePic: 'https://bit.ly/dan-abramov',
-        timeOfMessage: 'Jan 25 at 22:47',
-        chatMessage: 'Hola Amigos!',
-      },
-      {
-        type: 'room-alert-message',
-        username: 'joelmathew',
-      },
-    ],
-    Grupo: [
-      {
-        type: 'room-chat-message',
-        username: 'alnhenry',
-        firstname: 'Alan',
-        lastname: 'Henry',
-        profilePic: 'https://bit.ly/dan-abramov',
-        timeOfMessage: 'Jan 25 at 10:47',
-        chatMessage: 'yo yo yo',
-      },
-      {
-        type: 'room-chat-message',
-        username: 'alnhenry',
-        firstname: 'Alan',
-        lastname: 'Henry',
-        profilePic: 'https://bit.ly/dan-abramov',
-        timeOfMessage: 'Jan 25 at 10:47',
-        chatMessage: 'Chillin in goa with my peeps',
-      },
-      {
-        type: 'room-alert-message',
-        username: 'alanhenry',
-      },
-    ],
-  };
-
   const roomMembersData = {
     CodeRoyale: [
       {
@@ -104,7 +62,7 @@ const Room = ({
   };
 
   const [selectedRoom, setSelectedRoom] = useState(
-    Object.keys(roomMessageData)[0]
+    Object.keys(roomData.roomMessages)[0]
   );
 
   useEffect(() => {
@@ -138,7 +96,7 @@ const Room = ({
       />
       <SelectedRoom
         roomName={selectedRoom}
-        roomMessageArray={roomMessageData[selectedRoom]}
+        roomMessageArray={roomData.roomMessages[selectedRoom]}
         roomMembersArray={roomMembersData[selectedRoom]}
         sendChatMessageRequest={handleSendChatMessage}
       />
