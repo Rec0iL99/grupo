@@ -18,6 +18,7 @@ export const createRoom = (socket, roomName, username) => (dispatch) => {
     username,
     (roomData) => {
       if (roomData) {
+        console.log(roomData);
         dispatch({ type: CREATE_ROOM_SUCCESS, payload: roomData });
       } else {
         dispatch({ type: CREATE_ROOM_FAIL });
@@ -53,11 +54,11 @@ export const sendRoomChatMessage = (
     username,
     chatMessage,
     (roomMessage) => {
-      console.log(roomMessage);
+      const data = { roomName, roomMessage };
       if (roomMessage) {
         dispatch({
           type: ROOM_MESSAGE,
-          payload: roomMessage,
+          payload: data,
         });
       }
     }

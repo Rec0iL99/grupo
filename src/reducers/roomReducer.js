@@ -6,10 +6,12 @@ import {
 
 const initialState = {
   isLoading: false,
-  roomMessagesArray: [],
+  rooms: {},
+  roomMessages: {},
 };
 
 const roomReducer = (state = initialState, action) => {
+  let roomName;
   switch (action.type) {
     case CREATE_ROOM_LOADING:
       return {
@@ -17,14 +19,22 @@ const roomReducer = (state = initialState, action) => {
         isLoading: true,
       };
     case CREATE_ROOM_SUCCESS:
+      roomName = action.payload.config.roomName;
       return {
         ...state,
-        rooms: action.payload,
+        rooms: { [roomName]: action.payload },
+        roomMessages: { [roomName]: [] },
       };
     case ROOM_MESSAGE:
+      roomName = action.payload.roomName;
       return {
         ...state,
-        roomMessagesArray: state.roomMessagesArray.concat(action.payload),
+        roomMessages: {
+          ...state.roomMessages,
+          [roomName]: state.roomMessages[roomName].concat(
+            action.payload.roomMessage
+          ),
+        },
       };
     default:
       return state;
