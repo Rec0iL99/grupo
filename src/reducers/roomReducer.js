@@ -22,8 +22,9 @@ const roomReducer = (state = initialState, action) => {
       roomName = action.payload.config.roomName;
       return {
         ...state,
-        rooms: { [roomName]: action.payload },
-        roomMessages: { [roomName]: [] },
+        isLoading: false,
+        rooms: { ...state.rooms, [roomName]: action.payload },
+        roomMessages: { ...state.roomMessages, [roomName]: [] },
       };
     case ROOM_MESSAGE:
       roomName = action.payload.roomName;

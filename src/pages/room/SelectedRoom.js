@@ -7,39 +7,9 @@ const SelectedRoom = (props) => {
   const {
     roomName,
     roomMessageArray,
-    roomMembersArray,
+    roomMembersObject,
     sendChatMessageRequest,
   } = props;
-  // // For testing
-  // const roomMessageArray = [
-  //   {
-  //     type: 'room-chat-message',
-  //     username: 'joelmathew',
-  //     firstname: 'Joel',
-  //     lastname: 'Mathew',
-  //     profilePic: 'https://bit.ly/dan-abramov',
-  //     timeOfMessage: 'Jan 25 at 22:47',
-  //     chatMessage: 'Hola Amigos!',
-  //   },
-  //   {
-  //     type: 'room-alert-message',
-  //     username: 'alanhenry',
-  //   },
-  // ];
-
-  // // For Testing
-  // const roomMembersArray = [
-  //   {
-  //     username: 'joelmathew',
-  //     profilePic: 'https://bit.ly/dan-abramov',
-  //     online: true,
-  //   },
-  //   {
-  //     username: 'alanhenry',
-  //     profilePic: 'https://bit.ly/dan-abramov',
-  //     online: false,
-  //   },
-  // ];
 
   const handleSendChatMessage = (chatMessage) => {
     const data = {
@@ -55,7 +25,7 @@ const SelectedRoom = (props) => {
         roomMessages={roomMessageArray}
         sendChatMessageRequest={handleSendChatMessage}
       />
-      <RoomMemberSection roomMembers={roomMembersArray} />
+      <RoomMemberSection roomMembers={roomMembersObject} />
     </Flex>
   );
 };

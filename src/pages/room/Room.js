@@ -23,44 +23,6 @@ const Room = ({
   const socket = socketData.socket;
   const username = getUserData().username;
 
-  // For testing
-  const roomMembersData = {
-    CodeRoyale: [
-      {
-        username: 'joelmathew',
-        profilePic: 'https://bit.ly/dan-abramov',
-        online: true,
-      },
-      {
-        username: 'alanhenry',
-        profilePic: 'https://bit.ly/dan-abramov',
-        online: false,
-      },
-    ],
-    Grupo: [
-      {
-        username: 'justinmathew',
-        profilePic: 'https://bit.ly/dan-abramov',
-        online: true,
-      },
-      {
-        username: 'naveensreevalsan',
-        profilePic: 'https://bit.ly/dan-abramov',
-        online: true,
-      },
-      {
-        username: 'donald',
-        profilePic: 'https://bit.ly/dan-abramov',
-        online: false,
-      },
-      {
-        username: 'sachinvilas',
-        profilePic: 'https://bit.ly/dan-abramov',
-        online: true,
-      },
-    ],
-  };
-
   const [selectedRoom, setSelectedRoom] = useState(
     Object.keys(roomData.roomMessages)[0]
   );
@@ -97,7 +59,11 @@ const Room = ({
       <SelectedRoom
         roomName={selectedRoom}
         roomMessageArray={roomData.roomMessages[selectedRoom]}
-        roomMembersArray={roomMembersData[selectedRoom]}
+        roomMembersObject={
+          roomData.rooms[selectedRoom]
+            ? roomData.rooms[selectedRoom].members
+            : null
+        }
         sendChatMessageRequest={handleSendChatMessage}
       />
     </Flex>
