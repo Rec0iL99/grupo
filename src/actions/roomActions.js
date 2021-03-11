@@ -4,7 +4,8 @@ import {
   CREATE_ROOM_SUCCESS,
   JOIN_ROOM_LOADING,
   JOIN_ROOM_SUCCESS,
-  ROOM_MESSAGE,
+  NEW_ROOM_MESSAGE,
+  NEW_ROOM_MEMBER,
 } from './types';
 
 export const createRoom = (socket, roomName, username) => (dispatch) => {
@@ -33,18 +34,39 @@ export const joinRoom = (socket, roomCode, username) => (dispatch) => {
     username,
     (roomData) => {
       console.log(roomData);
+      if (roomData) {
+        dispatch({
+          type: JOIN_ROOM_SUCCESS,
+          payload: roomData,
+        });
+      }
     }
   );
 };
 
-export const userJoinedRoomListener = (socket) => (dispatch) => {
+export const newRoomMember = (socket) => (dispatch) => {
   socket
-    .off(socketServerActions.SERVER_JOIN_ROOM)
-    .on(socketServerActions.SERVER_JOIN_ROOM, (data) => {
-      dispatch({
-        type: ROOM_MESSAGE,
-        payload: data,
-      });
+    .off(socketServerActions.SERVER_NEW_ROOM_MEMBER)
+    .on(socketServerActions.SERVER_NEW_ROOM_MEMBER, (data) => {
+      if (data) {
+        dispatch({
+          type: NEW_ROOM_MEMBER,
+          payload: data,
+        });
+      }
+    });
+};
+
+export const newRoomMessage = (socket) => (dispatch) => {
+  socket
+    .off(socketServerActions.SERVER_NEW_ROOM_MESSAGE)
+    .on(socketServerActions.SERVER_NEW_ROOM_MESSAGE, (data) => {
+      if (data) {
+        dispatch({
+          type: NEW_ROOM_MESSAGE,
+          payload: data,
+        });
+      }
     });
 };
 
@@ -63,10 +85,10 @@ export const sendRoomChatMessage = (
     (roomMessage) => {
       const data = { roomName, roomMessage };
       if (roomMessage) {
-        dispatch({
-          type: ROOM_MESSAGE,
-          payload: data,
-        });
+        // dispatch({
+        //   type: ROOM_MESSAGE,
+        //   payload: data,
+        // });
       }
     }
   );

@@ -29,6 +29,6 @@ export const socketClientActions = {
 
 // Socket Server Action constants
 export const socketServerActions = {
-  SERVER_JOIN_ROOM: 'SERVER_JOIN_ROOM',
-  SERVER_ROOM_MESSAGE: 'SERVER_ROOM_MESSAGE',
+  SERVER_NEW_ROOM_MEMBER: 'SERVER_NEW_ROOM_MEMBER',
+  SERVER_NEW_ROOM_MESSAGE: 'SERVER_NEW_ROOM_MESSAGE',
 };

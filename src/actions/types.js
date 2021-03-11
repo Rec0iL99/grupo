@@ -21,8 +21,9 @@ export const JOIN_ROOM_LOADING = 'JOIN_ROOM_LOADING';
 export const JOIN_ROOM_SUCCESS = 'JOIN_ROOM_SUCCESS';
 export const JOIN_ROOM_FAIL = 'JOIN_ROOM_FAIL';
 
-export const ROOM_MESSAGE = 'ROOM_MESSAGE';
-export const RECEIVED_ROOM_MESSAGE = 'RECEIVED_ROOM_MESSAGE';
+export const NEW_ROOM_MESSAGE = 'NEW_ROOM_MESSAGE';
+
+export const NEW_ROOM_MEMBER = 'NEW_ROOM_MEMBER';
 
 // Reset Action
 export const ACTION_RESET = 'ACTION_RESET';
