@@ -23,22 +23,6 @@ export const createRoom = (socket, roomName, username) => (dispatch) => {
   );
 };
 
-export const userJoinedRoomListener = (socket) => (dispatch) => {
-  socket.on(socketServerActions.SERVER_JOIN_ROOM, (data) => {
-    const roomMessage = {
-      roomName: data.room,
-      roomMessage: {
-        type: 'room-alert-message',
-        username: data.username,
-      },
-    };
-    dispatch({
-      type: ROOM_MESSAGE,
-      payload: roomMessage,
-    });
-  });
-};
-
 export const joinRoom = (socket, roomCode, username) => (dispatch) => {
   dispatch({
     type: JOIN_ROOM_LOADING,
@@ -51,6 +35,17 @@ export const joinRoom = (socket, roomCode, username) => (dispatch) => {
       console.log(roomData);
     }
   );
+};
+
+export const userJoinedRoomListener = (socket) => (dispatch) => {
+  socket
+    .off(socketServerActions.SERVER_JOIN_ROOM)
+    .on(socketServerActions.SERVER_JOIN_ROOM, (data) => {
+      dispatch({
+        type: ROOM_MESSAGE,
+        payload: data,
+      });
+    });
 };
 
 export const sendRoomChatMessage = (

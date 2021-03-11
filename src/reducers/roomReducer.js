@@ -24,17 +24,19 @@ const roomReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         rooms: { ...state.rooms, [roomName]: action.payload },
-        roomMessages: { ...state.roomMessages, [roomName]: [] },
       };
     case ROOM_MESSAGE:
       roomName = action.payload.roomName;
       return {
         ...state,
-        roomMessages: {
-          ...state.roomMessages,
-          [roomName]: state.roomMessages[roomName].concat(
-            action.payload.roomMessage
-          ),
+        rooms: {
+          ...state.rooms,
+          [roomName]: {
+            ...state.rooms[roomName],
+            messages: state.rooms[roomName].messages.concat(
+              action.payload.roomMessage
+            ),
+          },
         },
       };
     default:
