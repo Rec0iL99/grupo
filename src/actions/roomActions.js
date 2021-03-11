@@ -47,11 +47,11 @@ export const joinRoom = (socket, roomCode, username) => (dispatch) => {
 export const newRoomMember = (socket) => (dispatch) => {
   socket
     .off(socketServerActions.SERVER_NEW_ROOM_MEMBER)
-    .on(socketServerActions.SERVER_NEW_ROOM_MEMBER, (data) => {
-      if (data) {
+    .on(socketServerActions.SERVER_NEW_ROOM_MEMBER, (newMember) => {
+      if (newMember) {
         dispatch({
           type: NEW_ROOM_MEMBER,
-          payload: data,
+          payload: newMember,
         });
       }
     });
@@ -60,11 +60,11 @@ export const newRoomMember = (socket) => (dispatch) => {
 export const newRoomMessage = (socket) => (dispatch) => {
   socket
     .off(socketServerActions.SERVER_NEW_ROOM_MESSAGE)
-    .on(socketServerActions.SERVER_NEW_ROOM_MESSAGE, (data) => {
-      if (data) {
+    .on(socketServerActions.SERVER_NEW_ROOM_MESSAGE, (roomMessage) => {
+      if (roomMessage) {
         dispatch({
           type: NEW_ROOM_MESSAGE,
-          payload: data,
+          payload: roomMessage,
         });
       }
     });
@@ -76,22 +76,18 @@ export const sendRoomChatMessage = (
   username,
   chatMessage
 ) => (dispatch) => {
-  console.log(roomName, chatMessage);
   socket.emit(
     socketClientActions.CLIENT_ROOM_MESSAGE,
     roomName,
     username,
     chatMessage,
     (roomMessage) => {
-      const data = { roomName, roomMessage };
       if (roomMessage) {
-        // dispatch({
-        //   type: ROOM_MESSAGE,
-        //   payload: data,
-        // });
+        dispatch({
+          type: NEW_ROOM_MESSAGE,
+          payload: { roomName, roomMessage },
+        });
       }
     }
   );
 };
-
-export const receiveRoomChatMessage = (socket) => (dispatch) => {};

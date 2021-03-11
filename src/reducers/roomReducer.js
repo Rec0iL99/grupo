@@ -18,6 +18,12 @@ const roomReducer = (state = initialState, action) => {
         ...state,
         rooms: { ...state.rooms, [roomName]: action.payload },
       };
+    case JOIN_ROOM_SUCCESS:
+      roomName = action.payload.config.roomName;
+      return {
+        ...state,
+        rooms: { ...state.rooms, [roomName]: action.payload },
+      };
     case NEW_ROOM_MEMBER:
       roomName = action.payload.roomName;
       return {
@@ -45,12 +51,6 @@ const roomReducer = (state = initialState, action) => {
             ),
           },
         },
-      };
-    case JOIN_ROOM_SUCCESS:
-      roomName = action.payload.config.roomName;
-      return {
-        ...state,
-        rooms: { ...state.rooms, [roomName]: action.payload },
       };
     default:
       return state;
