@@ -5,6 +5,7 @@ import { Flex } from '@chakra-ui/react';
 import { connectToSocketServer } from '../../actions/socketActions';
 import {
   createRoom,
+  userJoinedRoomListener,
   joinRoom,
   sendRoomChatMessage,
 } from '../../actions/roomActions';
@@ -16,6 +17,7 @@ const Room = ({
   socketData,
   roomData,
   createRoom,
+  userJoinedRoomListener,
   joinRoom,
   sendRoomChatMessage,
   connectToSocketServer,
@@ -30,6 +32,12 @@ const Room = ({
   useEffect(() => {
     connectToSocketServer();
   }, [connectToSocketServer]);
+
+  useEffect(() => {
+    if (socket !== null) {
+      userJoinedRoomListener(socket, selectedRoom);
+    }
+  }, [socket, userJoinedRoomListener, selectedRoom]);
 
   const handleCreateRoom = (roomName) => {
     createRoom(socket, roomName, username);
@@ -78,6 +86,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   connectToSocketServer,
   createRoom,
+  userJoinedRoomListener,
   joinRoom,
   sendRoomChatMessage,
 })(Room);

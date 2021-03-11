@@ -1,9 +1,9 @@
-import { socketClientActions } from '../utils/constants';
+import { socketClientActions, socketServerActions } from '../utils/constants';
 import {
   CREATE_ROOM_LOADING,
   CREATE_ROOM_SUCCESS,
-  JOIN_ROOM_SUCCESS,
   JOIN_ROOM_LOADING,
+  JOIN_ROOM_SUCCESS,
   ROOM_MESSAGE,
 } from './types';
 
@@ -17,11 +17,26 @@ export const createRoom = (socket, roomName, username) => (dispatch) => {
     username,
     (roomData) => {
       if (roomData) {
-        console.log(roomData);
         dispatch({ type: CREATE_ROOM_SUCCESS, payload: roomData });
       }
     }
   );
+};
+
+export const userJoinedRoomListener = (socket) => (dispatch) => {
+  socket.on(socketServerActions.SERVER_JOIN_ROOM, (data) => {
+    const roomMessage = {
+      roomName: data.room,
+      roomMessage: {
+        type: 'room-alert-message',
+        username: data.username,
+      },
+    };
+    dispatch({
+      type: ROOM_MESSAGE,
+      payload: roomMessage,
+    });
+  });
 };
 
 export const joinRoom = (socket, roomCode, username) => (dispatch) => {
@@ -32,8 +47,8 @@ export const joinRoom = (socket, roomCode, username) => (dispatch) => {
     socketClientActions.CLIENT_JOIN_ROOM,
     roomCode,
     username,
-    (data) => {
-      console.log(data);
+    (roomData) => {
+      console.log(roomData);
     }
   );
 };

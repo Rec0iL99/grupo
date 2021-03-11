@@ -7,26 +7,26 @@ const RoomMemberSection = ({ roomMembers }) => {
   let roomOfflineMemberCards = null;
 
   if (roomMembers) {
-    roomOnlineMemberCards = Object.keys(roomMembers).map((key, index) => {
-      if (roomMembers[key].online) {
+    roomOnlineMemberCards = roomMembers.map((roomMember, index) => {
+      if (roomMember.online) {
         return (
           <RoomMemberCard
             key={index}
-            username={roomMembers[key].username}
-            profilePic={roomMembers[key].profilePic}
-            online={roomMembers[key].online}
+            username={roomMember.username}
+            profilePic={roomMember.profilePic}
+            online={roomMember.online}
           />
         );
       }
     });
-    roomOfflineMemberCards = Object.keys(roomMembers).map((key, index) => {
-      if (!roomMembers[key].online) {
+    roomOfflineMemberCards = roomMembers.map((roomMember, index) => {
+      if (!roomMember.online) {
         return (
           <RoomMemberCard
             key={index}
-            username={roomMembers[key].username}
-            profilePic={roomMembers[key].profilePic}
-            online={roomMembers[key].online}
+            username={roomMember.username}
+            profilePic={roomMember.profilePic}
+            online={roomMember.online}
           />
         );
       }
