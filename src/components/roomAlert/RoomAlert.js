@@ -12,7 +12,7 @@ const RoomAlert = ({ username, type }) => {
       _hover={{ bg: '#e3e6e8' }}
       transition='0.3s'
     >
-      <Text fontSize='sm'>{username} joined the server</Text>
+      <Text fontSize='sm'>{username} joined the room</Text>
       <Icon
         as={AiOutlineArrowRight}
         w={4}

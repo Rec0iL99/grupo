@@ -7,7 +7,7 @@ const SelectedRoom = (props) => {
   const {
     roomName,
     roomMessageArray,
-    roomMembersObject,
+    roomMembersArray,
     sendChatMessageRequest,
   } = props;
 
@@ -25,7 +25,7 @@ const SelectedRoom = (props) => {
         roomMessages={roomMessageArray}
         sendChatMessageRequest={handleSendChatMessage}
       />
-      <RoomMemberSection roomMembers={roomMembersObject} />
+      <RoomMemberSection roomMembers={roomMembersArray} />
     </Flex>
   );
 };

@@ -8,24 +8,22 @@ const RoomChatSection = (props) => {
   const [chatMessage, setChatMessage] = useState('');
   let roomChatCards = null;
 
-  let roomMessageArray = roomMessages;
-
-  if (roomMessageArray !== undefined) {
-    roomChatCards = roomMessageArray.map((item, index) => {
-      if (item.type === 'room-chat-message') {
+  if (roomMessages) {
+    roomChatCards = roomMessages.map((roomMessage, index) => {
+      if (roomMessage.type === 'room-chat-message') {
         return (
           <RoomChatBubble
             key={index}
-            firstname={item.firstname}
-            lastname={item.lastname}
-            username={item.username}
-            profilePic={item.profilePic}
-            timeOfMessage={item.timeOfMessage}
-            chatMessage={item.chatMessage}
+            firstname={roomMessage.firstname}
+            lastname={roomMessage.lastname}
+            username={roomMessage.username}
+            profilePic={roomMessage.profilePic}
+            timeOfMessage={roomMessage.timeOfMessage}
+            chatMessage={roomMessage.chatMessage}
           />
         );
-      } else if (item.type === 'room-alert-message') {
-        return <RoomAlert key={index} username={item.username} />;
+      } else if (roomMessage.type === 'room-alert-message') {
+        return <RoomAlert key={index} username={roomMessage.username} />;
       }
     });
   }

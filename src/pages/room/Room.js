@@ -66,8 +66,12 @@ const Room = ({
       />
       <SelectedRoom
         roomName={selectedRoom}
-        roomMessageArray={roomData.roomMessages[selectedRoom]}
-        roomMembersObject={
+        roomMessageArray={
+          roomData.rooms[selectedRoom]
+            ? roomData.rooms[selectedRoom].messages
+            : null
+        }
+        roomMembersArray={
           roomData.rooms[selectedRoom]
             ? roomData.rooms[selectedRoom].members
             : null
