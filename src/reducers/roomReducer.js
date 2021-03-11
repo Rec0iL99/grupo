@@ -7,7 +7,6 @@ import {
 const initialState = {
   isLoading: false,
   rooms: {},
-  roomMessages: {},
 };
 
 const roomReducer = (state = initialState, action) => {

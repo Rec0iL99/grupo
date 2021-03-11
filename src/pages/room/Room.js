@@ -26,7 +26,7 @@ const Room = ({
   const username = getUserData().username;
 
   const [selectedRoom, setSelectedRoom] = useState(
-    Object.keys(roomData.roomMessages)[0]
+    Object.keys(roomData.rooms)[0]
   );
 
   useEffect(() => {
