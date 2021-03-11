@@ -33,7 +33,6 @@ export const joinRoom = (socket, roomCode, username) => (dispatch) => {
     roomCode,
     username,
     (roomData) => {
-      console.log(roomData);
       if (roomData) {
         dispatch({
           type: JOIN_ROOM_SUCCESS,

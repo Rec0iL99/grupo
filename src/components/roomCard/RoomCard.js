@@ -38,7 +38,7 @@ const RoomCard = (props) => {
       }}
       onClick={handleOnClick}
     >
-      <Avatar name={roomName} src='https://bit.ly/dan-abramov' size='sm' />
+      <Avatar name={roomName} src={roomAvatarUrl} size='sm' />
       <Text fontSize='md' marginLeft='7px'>
         {roomName}
       </Text>

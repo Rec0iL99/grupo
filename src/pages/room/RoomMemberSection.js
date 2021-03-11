@@ -17,6 +17,8 @@ const RoomMemberSection = ({ roomMembers }) => {
             online={roomMember.online}
           />
         );
+      } else {
+        return null;
       }
     });
     roomOfflineMemberCards = roomMembers.map((roomMember, index) => {
@@ -29,6 +31,8 @@ const RoomMemberSection = ({ roomMembers }) => {
             online={roomMember.online}
           />
         );
+      } else {
+        return null;
       }
     });
   }

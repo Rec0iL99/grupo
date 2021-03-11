@@ -2,7 +2,7 @@ import React from 'react';
 import { Flex, Text, Icon } from '@chakra-ui/react';
 import { AiOutlineArrowRight, AiOutlineCloseCircle } from 'react-icons/ai';
 
-const RoomAlert = ({ username, type }) => {
+const RoomAlert = ({ username, action }) => {
   return (
     <Flex
       marginTop='16px'
@@ -14,7 +14,9 @@ const RoomAlert = ({ username, type }) => {
     >
       <Text fontSize='sm'>{username} joined the room</Text>
       <Icon
-        as={AiOutlineArrowRight}
+        as={
+          action === 'joined-room' ? AiOutlineArrowRight : AiOutlineCloseCircle
+        }
         w={4}
         h={4}
         color='teal'

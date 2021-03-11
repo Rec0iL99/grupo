@@ -23,7 +23,15 @@ const RoomChatSection = (props) => {
           />
         );
       } else if (roomMessage.type === 'room-alert-message') {
-        return <RoomAlert key={index} username={roomMessage.username} />;
+        return (
+          <RoomAlert
+            key={index}
+            action={roomMessage.action}
+            username={roomMessage.username}
+          />
+        );
+      } else {
+        return null;
       }
     });
   }

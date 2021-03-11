@@ -33,6 +33,7 @@ const RoomSelectSection = (props) => {
         <RoomCard
           key={index}
           roomName={roomName}
+          roomAvatarUrl={rooms[roomName].config.roomAvatar}
           roomSelected={handleRoomSelected}
         />
       );
