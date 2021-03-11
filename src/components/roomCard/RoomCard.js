@@ -2,10 +2,12 @@ import React from 'react';
 import { Avatar, Text, Box } from '@chakra-ui/react';
 
 const RoomCard = (props) => {
-  const { roomName, roomAvatarUrl } = props;
+  // Destructing the props object
+  const { roomName, roomAvatarUrl, roomSelected } = props;
 
+  // Handle onClick when user clicks on the card component
   const handleOnClick = () => {
-    props.roomSelected(roomName);
+    roomSelected(roomName);
   };
 
   return (

@@ -8,6 +8,7 @@ import {
   NEW_ROOM_MEMBER,
 } from './types';
 
+// Action to create room
 export const createRoom = (socket, roomName, username) => (dispatch) => {
   dispatch({
     type: CREATE_ROOM_LOADING,
@@ -24,6 +25,7 @@ export const createRoom = (socket, roomName, username) => (dispatch) => {
   );
 };
 
+// Action to join room
 export const joinRoom = (socket, roomCode, username) => (dispatch) => {
   dispatch({
     type: JOIN_ROOM_LOADING,
@@ -43,6 +45,7 @@ export const joinRoom = (socket, roomCode, username) => (dispatch) => {
   );
 };
 
+// Action for listener for new member joining room
 export const newRoomMember = (socket) => (dispatch) => {
   socket
     .off(socketServerActions.SERVER_NEW_ROOM_MEMBER)
@@ -56,6 +59,7 @@ export const newRoomMember = (socket) => (dispatch) => {
     });
 };
 
+// Action for listener for new room message
 export const newRoomMessage = (socket) => (dispatch) => {
   socket
     .off(socketServerActions.SERVER_NEW_ROOM_MESSAGE)
@@ -69,6 +73,7 @@ export const newRoomMessage = (socket) => (dispatch) => {
     });
 };
 
+// Action for sending new room chat message
 export const sendRoomChatMessage = (
   socket,
   roomName,

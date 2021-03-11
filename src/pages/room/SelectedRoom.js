@@ -11,6 +11,7 @@ const SelectedRoom = (props) => {
     sendChatMessageRequest,
   } = props;
 
+  // Handle sending chat message to room.js through props
   const handleSendChatMessage = (chatMessage) => {
     const data = {
       chatMessage: chatMessage,

@@ -26,6 +26,7 @@ const CustomModal = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [inputText, setInputText] = useState('');
 
+  // Handling modal button click
   const handleActionButtonClick = () => {
     getModalData(inputText);
     onClose();

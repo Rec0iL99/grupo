@@ -6,6 +6,7 @@ const RoomMemberSection = ({ roomMembers }) => {
   let roomOnlineMemberCards = null;
   let roomOfflineMemberCards = null;
 
+  // Mapping room members
   if (roomMembers) {
     roomOnlineMemberCards = roomMembers.map((roomMember, index) => {
       if (roomMember.online) {

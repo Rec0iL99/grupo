@@ -27,38 +27,45 @@ const Room = ({
   const socket = socketData.socket;
   const username = getUserData().username;
 
+  // Initializing intial room
   const [selectedRoom, setSelectedRoom] = useState(
     Object.keys(roomData.rooms)[0]
   );
-
+  // Connect to socket server
   useEffect(() => {
     connectToSocketServer();
   }, [connectToSocketServer]);
 
+  // Initializing newRoomMember listener
   useEffect(() => {
     if (socket !== null) {
       newRoomMember(socket);
     }
   }, [socket, newRoomMember]);
 
+  // Initializing newRoomMessage listener
   useEffect(() => {
     if (socket !== null) {
       newRoomMessage(socket);
     }
   }, [socket, newRoomMessage]);
 
+  // Handle create room from roomSelectSection
   const handleCreateRoom = (roomName) => {
     createRoom(socket, roomName, username);
   };
 
+  // Handle join room from roomSelectSection
   const handleJoinRoom = (roomCode) => {
     joinRoom(socket, roomCode, username);
   };
 
+  // Handle send chat message when user presses enter key
   const handleSendChatMessage = (data) => {
     sendRoomChatMessage(socket, data.roomName, username, data.chatMessage);
   };
 
+  // Handle onClick when user clicks on roomCard
   const handleRoomSelected = (roomName) => {
     setSelectedRoom(roomName);
   };

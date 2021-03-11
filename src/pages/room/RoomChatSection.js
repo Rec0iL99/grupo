@@ -8,6 +8,7 @@ const RoomChatSection = (props) => {
   const [chatMessage, setChatMessage] = useState('');
   let roomChatCards = null;
 
+  // Mapping room chat messages and room alerts
   if (roomMessages) {
     roomChatCards = roomMessages.map((roomMessage, index) => {
       if (roomMessage.type === 'room-chat-message') {
@@ -36,6 +37,7 @@ const RoomChatSection = (props) => {
     });
   }
 
+  // Handle event when user presses enter key
   const handleChatInputKeyPressed = (event) => {
     if (event.key === 'Enter') {
       sendChatMessageRequest(event.target.value);
