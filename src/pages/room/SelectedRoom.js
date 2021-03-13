@@ -5,6 +5,7 @@ import RoomMemberSection from './RoomMemberSection';
 
 const SelectedRoom = (props) => {
   const {
+    numberOfRooms,
     roomName,
     roomMessageArray,
     roomMembersArray,
@@ -20,7 +21,8 @@ const SelectedRoom = (props) => {
     sendChatMessageRequest(data);
   };
 
-  return (
+  // Default content
+  let content = (
     <Flex w='75%' h='100vh'>
       <RoomChatSection
         roomMessages={roomMessageArray}
@@ -29,6 +31,13 @@ const SelectedRoom = (props) => {
       <RoomMemberSection roomMembers={roomMembersArray} />
     </Flex>
   );
+
+  // If user has not joined any rooms then display nothing
+  if (numberOfRooms === 0) {
+    content = null;
+  }
+
+  return content;
 };
 
 export default SelectedRoom;

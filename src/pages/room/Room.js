@@ -80,6 +80,7 @@ const Room = ({
         sendRoomSelectedRequest={handleRoomSelected}
       />
       <SelectedRoom
+        numberOfRooms={Object.keys(roomData.rooms).length}
         roomName={selectedRoom}
         roomMessageArray={
           roomData.rooms[selectedRoom]
