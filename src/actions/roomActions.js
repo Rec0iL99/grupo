@@ -9,40 +9,30 @@ import {
 } from './types';
 
 // Action to create room
-export const createRoom = (socket, roomName, username) => (dispatch) => {
+export const createRoom = (socket, roomName) => (dispatch) => {
   dispatch({
     type: CREATE_ROOM_LOADING,
   });
-  socket.emit(
-    socketClientActions.CLIENT_CREATE_ROOM,
-    roomName,
-    username,
-    (roomData) => {
-      if (roomData) {
-        dispatch({ type: CREATE_ROOM_SUCCESS, payload: roomData });
-      }
+  socket.emit(socketClientActions.CLIENT_CREATE_ROOM, roomName, (roomData) => {
+    if (roomData) {
+      dispatch({ type: CREATE_ROOM_SUCCESS, payload: roomData });
     }
-  );
+  });
 };
 
 // Action to join room
-export const joinRoom = (socket, roomCode, username) => (dispatch) => {
+export const joinRoom = (socket, roomCode) => (dispatch) => {
   dispatch({
     type: JOIN_ROOM_LOADING,
   });
-  socket.emit(
-    socketClientActions.CLIENT_JOIN_ROOM,
-    roomCode,
-    username,
-    (roomData) => {
-      if (roomData) {
-        dispatch({
-          type: JOIN_ROOM_SUCCESS,
-          payload: roomData,
-        });
-      }
+  socket.emit(socketClientActions.CLIENT_JOIN_ROOM, roomCode, (roomData) => {
+    if (roomData) {
+      dispatch({
+        type: JOIN_ROOM_SUCCESS,
+        payload: roomData,
+      });
     }
-  );
+  });
 };
 
 // Action for listener for new member joining room
@@ -74,16 +64,12 @@ export const newRoomMessage = (socket) => (dispatch) => {
 };
 
 // Action for sending new room chat message
-export const sendRoomChatMessage = (
-  socket,
-  roomName,
-  username,
-  chatMessage
-) => (dispatch) => {
+export const sendRoomChatMessage = (socket, roomName, chatMessage) => (
+  dispatch
+) => {
   socket.emit(
     socketClientActions.CLIENT_ROOM_MESSAGE,
     roomName,
-    username,
     chatMessage,
     (roomMessage) => {
       if (roomMessage) {

@@ -11,7 +11,6 @@ import {
   sendRoomChatMessage,
 } from '../../actions/roomActions';
 import { connect } from 'react-redux';
-import getUserData from '../../utils/getUserData';
 import SelectedRoom from './SelectedRoom';
 
 const Room = ({
@@ -25,7 +24,6 @@ const Room = ({
   connectToSocketServer,
 }) => {
   const socket = socketData.socket;
-  const username = getUserData().username;
 
   // Initializing intial room
   const [selectedRoom, setSelectedRoom] = useState(
@@ -52,17 +50,17 @@ const Room = ({
 
   // Handle create room from roomSelectSection
   const handleCreateRoom = (roomName) => {
-    createRoom(socket, roomName, username);
+    createRoom(socket, roomName);
   };
 
   // Handle join room from roomSelectSection
   const handleJoinRoom = (roomCode) => {
-    joinRoom(socket, roomCode, username);
+    joinRoom(socket, roomCode);
   };
 
   // Handle send chat message when user presses enter key
   const handleSendChatMessage = (data) => {
-    sendRoomChatMessage(socket, data.roomName, username, data.chatMessage);
+    sendRoomChatMessage(socket, data.roomName, data.chatMessage);
   };
 
   // Handle onClick when user clicks on roomCard
