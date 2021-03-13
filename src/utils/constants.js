@@ -29,6 +29,8 @@ export const socketClientActions = {
 
 // Socket Server Action constants
 export const socketServerActions = {
+  SERVER_CONNECTION_SUCCESS: 'SERVER_CONNECTION_SUCCESS',
+  SERVER_CONNECTION_FAIL: 'SERVER_CONNECTION_FAIL',
   SERVER_NEW_ROOM_MEMBER: 'SERVER_NEW_ROOM_MEMBER',
   SERVER_NEW_ROOM_MESSAGE: 'SERVER_NEW_ROOM_MESSAGE',
 };
