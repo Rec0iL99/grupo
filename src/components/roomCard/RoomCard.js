@@ -1,9 +1,10 @@
 import React from 'react';
-import { Avatar, Text, Box } from '@chakra-ui/react';
+import { Avatar, Text, Box, Flex } from '@chakra-ui/react';
+import InviteMembers from '../inviteMembers/InviteMembers';
 
 const RoomCard = (props) => {
   // Destructing the props object
-  const { roomName, roomAvatarUrl, roomSelected } = props;
+  const { roomName, roomCode, roomAvatarUrl, roomSelected } = props;
 
   // Handle onClick when user clicks on the card component
   const handleOnClick = () => {
@@ -41,9 +42,12 @@ const RoomCard = (props) => {
       onClick={handleOnClick}
     >
       <Avatar name={roomName} src={roomAvatarUrl} size='sm' />
-      <Text fontSize='md' marginLeft='7px'>
-        {roomName}
-      </Text>
+      <Flex alignItems='center' justifyContent='space-between' w='100%'>
+        <Text fontSize='md' marginLeft='7px'>
+          {roomName}
+        </Text>
+        <InviteMembers roomName={roomName} roomCode={roomCode} />
+      </Flex>
     </Box>
   );
 };
