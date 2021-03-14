@@ -1,7 +1,8 @@
 import React from 'react';
-import { Flex, Link, Stack, Text, Spinner } from '@chakra-ui/react';
+import { Flex, Link, Stack, Text, Spinner, Image } from '@chakra-ui/react';
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 import { useHistory } from 'react-router-dom';
+import grupoLogoTeal from '../../assets/grupoLogoTeal.svg';
 
 const LoginRightSection = (props) => {
   const history = useHistory();
@@ -20,9 +21,12 @@ const LoginRightSection = (props) => {
       alignItems='center'
     >
       <Stack align='center'>
-        <Text fontSize='4xl' fontWeight='bold'>
-          Grupo
-        </Text>
+        <Flex alignItems='center'>
+          <Image boxSize='50px' src={grupoLogoTeal} alt='Waiting for room' />
+          <Text fontSize='4xl' fontWeight='bold' color='#008080'>
+            grupo
+          </Text>
+        </Flex>
         <Text fontSize='2xl'>Login to Grupo</Text>
         <GoogleAuth text='Login with Google' getAuthData={getAuthData} />
         <Text fontSize='sm'>
