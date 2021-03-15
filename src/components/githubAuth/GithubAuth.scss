@@ -1,0 +1,25 @@
+$fontColor: #ffffff;
+$bgColor: #24292e;
+
+.github-custom-button {
+  border: none;
+  color: $fontColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $bgColor;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  width: 250px;
+  height: 50px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+  transition-duration: 0.2s;
+  &:focus {
+    outline: 0;
+  }
+  &:active {
+    box-shadow: none;
+  }
+}

@@ -3,10 +3,11 @@ import { Flex, Link, Stack, Text, Spinner, Image } from '@chakra-ui/react';
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 import { useHistory } from 'react-router-dom';
 import grupoLogoTeal from '../../assets/grupoLogoTeal.svg';
+import GithubAuth from '../../components/githubAuth/GithubAuth';
 
 const LoginRightSection = (props) => {
   const history = useHistory();
-  // Function that's called once GoogleAuth passes authData
+  // Function that's called once Auth component passes authData
   const getAuthData = (authData) => {
     props.sendLoginRequest(authData);
   };
@@ -29,6 +30,7 @@ const LoginRightSection = (props) => {
         </Flex>
         <Text fontSize='2xl'>Login to Grupo</Text>
         <GoogleAuth text='Login with Google' getAuthData={getAuthData} />
+        <GithubAuth text='Login with GitHub' getAuthData={getAuthData} />
         <Text fontSize='sm'>
           Not a Grupo user yet?{' '}
           <Link onClick={() => history.push('/signup')}>Sign up now!</Link>

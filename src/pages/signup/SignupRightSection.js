@@ -14,6 +14,7 @@ import {
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 import { useHistory } from 'react-router-dom';
 import grupoLogoTeal from '../../assets/grupoLogoTeal.svg';
+import GithubAuth from '../../components/githubAuth/GithubAuth';
 
 const SignupRightSection = (props) => {
   const [show, setShow] = React.useState(false);
@@ -25,11 +26,10 @@ const SignupRightSection = (props) => {
   const [sendSignupRequest, setSendSignupRequest] = useState(false);
   const history = useHistory();
 
-  // Function that's called once GoogleAuth passes authData
+  // Function that's called once Auth component passes authData
   const getAuthData = (authData) => {
     setAuthData(authData);
     setShowPasswordPrompt(true);
-    // props.sendSignupRequest(authData);
   };
 
   // Function called after user enters password
@@ -68,6 +68,7 @@ const SignupRightSection = (props) => {
         </Flex>
         <Text fontSize='2xl'>Sign up for Grupo</Text>
         <GoogleAuth text='Sign up with Google' getAuthData={getAuthData} />
+        <GithubAuth text='Sign up with GitHub' getAuthData={getAuthData} />
         <Text fontSize='sm'>
           Already have a account{' '}
           <Link onClick={() => history.push('/login')}>Login now!</Link>
