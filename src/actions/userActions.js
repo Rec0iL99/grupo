@@ -23,10 +23,14 @@ export const loginUser = (authData) => (dispatch) => {
   });
 
   // Data to be sent to server
-  const dataToServer = {
-    issuer: authData.issuer,
-    accessToken: authData.accessToken,
-  };
+  let dataToServer;
+
+  if (authData.issuer === 'github') {
+    dataToServer = {
+      issuer: authData.issuer,
+      accessCode: authData.accessCode,
+    };
+  }
 
   axiosInstance
     .post('/users/login', dataToServer)

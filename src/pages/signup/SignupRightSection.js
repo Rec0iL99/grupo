@@ -11,7 +11,6 @@ import {
   Button,
   Image,
 } from '@chakra-ui/react';
-import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 import { useHistory } from 'react-router-dom';
 import grupoLogoTeal from '../../assets/grupoLogoTeal.svg';
 import GithubAuth from '../../components/githubAuth/GithubAuth';
@@ -67,7 +66,6 @@ const SignupRightSection = (props) => {
           </Text>
         </Flex>
         <Text fontSize='2xl'>Sign up for Grupo</Text>
-        <GoogleAuth text='Sign up with Google' getAuthData={getAuthData} />
         <GithubAuth text='Sign up with GitHub' getAuthData={getAuthData} />
         <Text fontSize='sm'>
           Already have a account{' '}

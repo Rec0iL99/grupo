@@ -15,8 +15,7 @@ const getUserData = () => {
   } else {
     user = {
       email: 'grupouser@email.com',
-      firstName: 'Grupo',
-      lastName: 'User',
+      name: 'Grupo User',
       picture: 'https://www.flaticon.com/svg/static/icons/svg/21/21104.svg',
       userName: 'grupouser',
     };
