@@ -28,7 +28,7 @@ _**Note**_: _For this you need to install git on your machine. You can download 
 
 - If you haven't forked the project, run the following command -
 
-  `git clone https://github.com/Rec0iL99/grupo
+  `git clone https://github.com/Rec0iL99/grupo.git`
 
 ### Run app
 
