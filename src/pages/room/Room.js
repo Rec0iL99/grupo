@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import RoomSelectSection from './RoomSelectSection';
 import Header from '../../components/header/Header';
-import { Flex } from '@chakra-ui/react';
+import { Flex, Spinner } from '@chakra-ui/react';
 import { connectToSocketServer } from '../../actions/socketActions';
 import { preCheckUser } from '../../actions/userActions';
 import {
@@ -13,8 +13,10 @@ import {
 } from '../../actions/roomActions';
 import { connect } from 'react-redux';
 import SelectedRoom from './SelectedRoom';
+import { useHistory } from 'react-router-dom';
 
 const Room = ({
+  userData,
   socketData,
   roomData,
   createRoom,
@@ -26,14 +28,25 @@ const Room = ({
   preCheckUser,
 }) => {
   const socket = socketData.socket;
+  const history = useHistory();
 
   // Initializing intial room
   const [selectedRoom, setSelectedRoom] = useState(
     Object.keys(roomData.rooms)[0]
   );
-  // Connect to socket server
+
+  // Precheck before user sees anything
   useEffect(() => {
-    connectToSocketServer();
+    if (localStorage.token) {
+      preCheckUser(history);
+    }
+  }, [preCheckUser, history]);
+
+  // Connect to socket server if precheck successfully and localStorage has accessToken
+  useEffect(() => {
+    if (localStorage.token) {
+      connectToSocketServer();
+    }
   }, [connectToSocketServer]);
 
   // Initializing newRoomMember listener
@@ -70,7 +83,8 @@ const Room = ({
     setSelectedRoom(roomName);
   };
 
-  return (
+  // Default content
+  let content = (
     <Flex>
       <Header />
       <RoomSelectSection
@@ -96,9 +110,18 @@ const Room = ({
       />
     </Flex>
   );
+
+  if (userData.preCheckData.isLoading) {
+    <Flex>
+      <Spinner color='teal' />
+    </Flex>;
+  }
+
+  return content;
 };
 
 const mapStateToProps = (state) => ({
+  userData: state.userData,
   socketData: state.socketData,
   roomData: state.roomData,
 });
