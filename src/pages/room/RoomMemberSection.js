@@ -15,6 +15,7 @@ const RoomMemberSection = ({ roomMembers }) => {
             key={index}
             username={roomMember.username}
             profilePic={roomMember.profilePic}
+            profileLink={roomMember.profileLink}
             online={roomMember.online}
           />
         );
@@ -29,6 +30,7 @@ const RoomMemberSection = ({ roomMembers }) => {
             key={index}
             username={roomMember.username}
             profilePic={roomMember.profilePic}
+            profileLink={roomMember.profileLink}
             online={roomMember.online}
           />
         );

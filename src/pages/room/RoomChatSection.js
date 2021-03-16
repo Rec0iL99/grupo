@@ -15,10 +15,10 @@ const RoomChatSection = (props) => {
         return (
           <RoomChatBubble
             key={index}
-            firstname={roomMessage.firstname}
-            lastname={roomMessage.lastname}
+            name={roomMessage.name}
             username={roomMessage.username}
             profilePic={roomMessage.profilePic}
+            profileLink={roomMessage.profileLink}
             timeOfMessage={roomMessage.timeOfMessage}
             chatMessage={roomMessage.chatMessage}
           />

@@ -2,13 +2,18 @@ import React from 'react';
 import { Flex, Avatar, Text, Stack } from '@chakra-ui/react';
 
 const RoomChatBubble = ({
-  firstname,
-  lastname,
+  name,
   username,
   profilePic,
+  profileLink,
   chatMessage,
   timeOfMessage,
 }) => {
+  // User clicks on profile pic
+  const handleProfilePicClick = () => {
+    window.open(profileLink, '_blank');
+  };
+
   return (
     <Flex
       alignItems='center'
@@ -16,11 +21,16 @@ const RoomChatBubble = ({
       _hover={{ bg: '#e3e6e8' }}
       transition='0.3s'
     >
-      <Avatar src={profilePic} size='sm' />
+      <Avatar
+        src={profilePic}
+        size='sm'
+        onClick={handleProfilePicClick}
+        cursor='pointer'
+      />
       <Stack marginLeft='13px'>
         <Flex>
           <Text fontSize='sm' fontWeight='bold'>
-            {firstname} {lastname}
+            {name}
           </Text>
           <Text fontSize='sm' marginLeft='5px'>
             @{username}

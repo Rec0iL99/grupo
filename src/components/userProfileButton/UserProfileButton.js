@@ -16,9 +16,6 @@ import {
 const UserProfileButton = () => {
   const userData = getUserData();
 
-  // Full name for popover
-  const fullName = `${userData.firstname} ${userData.lastname}`;
-
   return (
     <Popover>
       <PopoverTrigger>
@@ -33,7 +30,7 @@ const UserProfileButton = () => {
       <PopoverContent>
         <PopoverCloseButton />
         <PopoverHeader fontWeight='semibold' fontSize='lg'>
-          {fullName}
+          {userData.name}
           <Text fontSize='sm'>{userData.email}</Text>
         </PopoverHeader>
         <PopoverBody>
