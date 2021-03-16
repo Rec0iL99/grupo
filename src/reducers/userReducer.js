@@ -1,5 +1,4 @@
 import {
-  ACTION_RESET,
   LOGIN_LOADING,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -9,6 +8,10 @@ import {
   PRECHECK_LOADING,
   PRECHECK_SUCCESS,
   PRECHECK_FAIL,
+  LOGOUT_LOADING,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAIL,
+  ACTION_RESET,
 } from '../actions/types';
 
 const initialState = {
@@ -19,6 +22,9 @@ const initialState = {
     isLoading: false,
   },
   preCheckData: {
+    isLoading: false,
+  },
+  logoutData: {
     isLoading: false,
   },
 };
@@ -97,6 +103,30 @@ const userReducer = (state = initialState, action) => {
           error: action.payload,
         },
       };
+    case LOGOUT_LOADING:
+      return {
+        ...state,
+        logoutData: {
+          error: false,
+          isLoading: true,
+        },
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        logoutData: {
+          isLoading: false,
+          data: action.payload,
+        },
+      };
+    case LOGOUT_FAIL:
+      return {
+        ...state,
+        logoutData: {
+          isLoading: false,
+          error: action.payload,
+        },
+      };
     case ACTION_RESET:
       return {
         ...state,
@@ -109,6 +139,10 @@ const userReducer = (state = initialState, action) => {
           data: false,
         },
         preCheckData: {
+          error: false,
+          data: false,
+        },
+        logoutData: {
           error: false,
           data: false,
         },

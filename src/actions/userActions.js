@@ -8,6 +8,9 @@ import {
   PRECHECK_LOADING,
   PRECHECK_SUCCESS,
   PRECHECK_FAIL,
+  LOGOUT_LOADING,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAIL,
   ACTION_RESET,
 } from './types';
 import loggedOutAxios from '../helpers/loggedOutAxios';
@@ -86,6 +89,23 @@ export const preCheckUser = (history) => (dispatch) => {
     .catch((error) => {
       dispatch({
         type: PRECHECK_FAIL,
+        payload: error.response ? error.response.data : SERVER_DOWN,
+      });
+    });
+};
+
+// Logout user
+export const logoutUser = (history) => (dispatch) => {
+  dispatch({ type: LOGOUT_LOADING });
+
+  loggedInAxios(history)
+    .get('/users/logout')
+    .then((response) => {
+      dispatch({ type: LOGOUT_SUCCESS, payload: response.data });
+    })
+    .catch((error) => {
+      dispatch({
+        type: LOGOUT_FAIL,
         payload: error.response ? error.response.data : SERVER_DOWN,
       });
     });
