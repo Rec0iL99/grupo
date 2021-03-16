@@ -3,6 +3,7 @@ import RoomSelectSection from './RoomSelectSection';
 import Header from '../../components/header/Header';
 import { Flex } from '@chakra-ui/react';
 import { connectToSocketServer } from '../../actions/socketActions';
+import { preCheckUser } from '../../actions/userActions';
 import {
   createRoom,
   joinRoom,
@@ -22,6 +23,7 @@ const Room = ({
   newRoomMessage,
   sendRoomChatMessage,
   connectToSocketServer,
+  preCheckUser,
 }) => {
   const socket = socketData.socket;
 
@@ -102,6 +104,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
+  preCheckUser,
   connectToSocketServer,
   createRoom,
   joinRoom,
