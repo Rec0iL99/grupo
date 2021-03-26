@@ -12,6 +12,13 @@ Grupo is a place where software developers can build communities and build super
 - Socket.IO
 - MongoDB
 
+## Modules
+
+| Module               |      Description      |
+| :------------------- | :-------------------: |
+| [Frontend](https://github.com/Rec0iL99/grupo)       |      React Frontend       |
+| [Backend](https://github.com/Rec0iL99/grupo-server) |    Node.js Server      |
+
 ## Setup and run
 
 To setup the project locally follow the instructions:
