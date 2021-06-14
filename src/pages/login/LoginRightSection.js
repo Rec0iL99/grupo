@@ -40,6 +40,7 @@ const LoginRightSection = () => {
 
   // Login success handling
   if (isSuccess && data.payload.message === LOGIN) {
+    loginMutation.reset();
     localStorage.token = data.payload.accessToken;
     history.push('/');
   }
