@@ -13,7 +13,6 @@ import {
 } from '../../actions/roomActions';
 import { connect } from 'react-redux';
 import SelectedRoom from './SelectedRoom';
-import { useHistory } from 'react-router-dom';
 
 const Room = ({
   userData,
@@ -28,7 +27,6 @@ const Room = ({
   preCheckUser,
 }) => {
   const socket = socketData.socket;
-  const history = useHistory();
 
   // Initializing intial room
   const [selectedRoom, setSelectedRoom] = useState(
@@ -36,11 +34,11 @@ const Room = ({
   );
 
   // Precheck before user sees anything
-  useEffect(() => {
-    if (localStorage.token) {
-      preCheckUser(history);
-    }
-  }, [preCheckUser, history]);
+  // useEffect(() => {
+  //   if (localStorage.token) {
+  //     preCheckUser(history);
+  //   }
+  // }, [preCheckUser, history]);
 
   // Connect to socket server if precheck successfully and localStorage has accessToken
   useEffect(() => {
