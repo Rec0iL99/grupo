@@ -5,8 +5,6 @@ import { Flex, Spinner } from '@chakra-ui/react';
 import { connectToSocketServer } from '../../actions/socketActions';
 import { preCheckUser } from '../../actions/userActions';
 import {
-  createRoom,
-  joinRoom,
   newRoomMember,
   newRoomMessage,
   sendRoomChatMessage,
@@ -15,13 +13,13 @@ import { connect } from 'react-redux';
 import SelectedRoom from './SelectedRoom';
 import { socketConnection } from '../../service/socket';
 import useSocket from '../../global-stores/useSocket';
+import useRooms from '../../global-stores/useRooms';
+import { createRoom, joinRoom } from '../../service/roomSocket';
 
 const Room = ({
   userData,
   socketData,
   roomData,
-  createRoom,
-  joinRoom,
   newRoomMember,
   newRoomMessage,
   sendRoomChatMessage,
@@ -30,6 +28,7 @@ const Room = ({
 }) => {
   const socket = useSocket((state) => state.socket);
   const setSocket = useSocket((state) => state.setSocket);
+  const setRooms = useRooms((state) => state.setRooms);
 
   // Initializing intial room
   const [selectedRoom, setSelectedRoom] = useState(
@@ -70,12 +69,16 @@ const Room = ({
 
   // Handle create room from roomSelectSection
   const handleCreateRoom = (roomName) => {
-    createRoom(socket, roomName);
+    createRoom(socket, roomName, (error, data) => {
+      setRooms(data);
+    });
   };
 
   // Handle join room from roomSelectSection
   const handleJoinRoom = (roomCode) => {
-    joinRoom(socket, roomCode);
+    joinRoom(socket, roomCode, (error, data) => {
+      setRooms(data);
+    });
   };
 
   // Handle send chat message when user presses enter key
@@ -134,8 +137,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   preCheckUser,
   connectToSocketServer,
-  createRoom,
-  joinRoom,
   newRoomMember,
   newRoomMessage,
   sendRoomChatMessage,

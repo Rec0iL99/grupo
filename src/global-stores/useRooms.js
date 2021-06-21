@@ -4,7 +4,9 @@ import { devtools } from 'zustand/middleware';
 let useRooms = (set) => ({
   rooms: {},
   setRooms: (room) =>
-    set((state) => ({ ...state.rooms, [room.config.roomName]: room })),
+    set((state) => ({
+      rooms: { ...state.rooms, [room.config.roomName]: room },
+    })),
 });
 
 if (process.env.REACT_APP_ENV === 'development') {
