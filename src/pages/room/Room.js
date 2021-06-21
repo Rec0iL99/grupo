@@ -27,6 +27,7 @@ const Room = ({
   preCheckUser,
 }) => {
   const socket = useSocket((state) => state.socket);
+  const rooms = useRooms((state) => state.rooms);
   const setSocket = useSocket((state) => state.setSocket);
   const setRooms = useRooms((state) => state.setRooms);
 
@@ -91,41 +92,36 @@ const Room = ({
     setSelectedRoom(roomName);
   };
 
-  // Default content
-  let content = (
+  if (userData.preCheckData.isLoading) {
+    return (
+      <Flex>
+        <Spinner color='teal' />
+      </Flex>
+    );
+  }
+
+  return (
     <Flex>
       <Header />
       <RoomSelectSection
-        rooms={roomData.rooms}
+        rooms={rooms}
         sendCreateRoomRequest={handleCreateRoom}
         sendJoinRoomRequest={handleJoinRoom}
         sendRoomSelectedRequest={handleRoomSelected}
       />
       <SelectedRoom
-        numberOfRooms={Object.keys(roomData.rooms).length}
+        numberOfRooms={Object.keys(rooms).length}
         roomName={selectedRoom}
         roomMessageArray={
-          roomData.rooms[selectedRoom]
-            ? roomData.rooms[selectedRoom].messages
-            : null
+          rooms[selectedRoom] ? rooms[selectedRoom].messages : null
         }
         roomMembersArray={
-          roomData.rooms[selectedRoom]
-            ? roomData.rooms[selectedRoom].members
-            : null
+          rooms[selectedRoom] ? rooms[selectedRoom].members : null
         }
         sendChatMessageRequest={handleSendChatMessage}
       />
     </Flex>
   );
-
-  if (userData.preCheckData.isLoading) {
-    <Flex>
-      <Spinner color='teal' />
-    </Flex>;
-  }
-
-  return content;
 };
 
 const mapStateToProps = (state) => ({
