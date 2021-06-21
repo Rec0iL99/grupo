@@ -14,6 +14,7 @@ import {
 import { connect } from 'react-redux';
 import SelectedRoom from './SelectedRoom';
 import { socketConnection } from '../../service/socket';
+import useSocket from '../../global-stores/useSocket';
 
 const Room = ({
   userData,
@@ -27,7 +28,8 @@ const Room = ({
   connectToSocketServer,
   preCheckUser,
 }) => {
-  const socket = socketData.socket;
+  const socket = useSocket((state) => state.socket);
+  const setSocket = useSocket((state) => state.setSocket);
 
   // Initializing intial room
   const [selectedRoom, setSelectedRoom] = useState(
@@ -45,10 +47,12 @@ const Room = ({
   useEffect(() => {
     if (localStorage.token) {
       socketConnection((error, data) => {
-        console.log(data);
+        if (data) {
+          setSocket(data.socket);
+        }
       });
     }
-  }, [connectToSocketServer]);
+  }, [setSocket]);
 
   // Initializing newRoomMember listener
   useEffect(() => {
