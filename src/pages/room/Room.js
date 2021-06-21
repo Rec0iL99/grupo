@@ -13,6 +13,7 @@ import {
 } from '../../actions/roomActions';
 import { connect } from 'react-redux';
 import SelectedRoom from './SelectedRoom';
+import { socketConnection } from '../../service/socket';
 
 const Room = ({
   userData,
@@ -43,7 +44,9 @@ const Room = ({
   // Connect to socket server if precheck successfully and localStorage has accessToken
   useEffect(() => {
     if (localStorage.token) {
-      connectToSocketServer();
+      socketConnection((error, data) => {
+        console.log(data);
+      });
     }
   }, [connectToSocketServer]);
 
