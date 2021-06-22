@@ -1,6 +1,8 @@
+/* eslint-disable consistent-return */
 import io from 'socket.io-client';
 import { socketServerActions } from '../utils/constants';
 
+/* eslint-disable import/prefer-default-export */
 export const socketConnection = (cb) => {
   const options = {
     transportOptions: {
@@ -17,15 +19,15 @@ export const socketConnection = (cb) => {
   if (!socket) return false;
 
   if (socket) {
-    socket.on(socketServerActions.SERVER_CONNECTION_SUCCESS, () => {
-      return cb(null, {
+    socket.on(socketServerActions.SERVER_CONNECTION_SUCCESS, () =>
+      cb(null, {
         message: socketServerActions.SERVER_CONNECTION_SUCCESS,
         socket,
-      });
-    });
+      })
+    );
 
-    socket.on('connect_error', () => {
-      return cb({ message: socketServerActions.SERVER_CONNECTION_FAIL }, null);
-    });
+    socket.on('connect_error', () =>
+      cb({ message: socketServerActions.SERVER_CONNECTION_FAIL }, null)
+    );
   }
 };

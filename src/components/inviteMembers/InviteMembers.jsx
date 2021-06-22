@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Icon } from '@chakra-ui/icon';
 import { IoPersonAddSharp } from 'react-icons/io5';
 import {
   Modal,
@@ -13,8 +12,9 @@ import {
   InputRightElement,
   Button,
   Tooltip,
+  Icon,
+  useDisclosure,
 } from '@chakra-ui/react';
-import { useDisclosure } from '@chakra-ui/react';
 
 const InviteMembers = ({ roomCode, roomName }) => {
   const [copied, setCopied] = useState(false);

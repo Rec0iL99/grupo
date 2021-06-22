@@ -1,9 +1,10 @@
 import React from 'react';
 import { Flex, InputGroup, Stack, Image } from '@chakra-ui/react';
-import RoomCard from '../../components/roomCard/RoomCard';
-import CustomModal from '../../components/customModal/CustomModal';
+import { v4 as uuidv4 } from 'uuid';
 import { IoIosAddCircle } from 'react-icons/io';
 import { GiJoint } from 'react-icons/gi';
+import RoomCard from '../../components/roomCard/RoomCard';
+import CustomModal from '../../components/customModal/CustomModal';
 import emptySpace from '../../assets/emptySpace.svg';
 
 const RoomSelectSection = (props) => {
@@ -33,17 +34,15 @@ const RoomSelectSection = (props) => {
 
   // Mapping all the rooms user joined
   if (rooms !== undefined) {
-    roomCards = Object.keys(rooms).map((roomName, index) => {
-      return (
-        <RoomCard
-          key={index}
-          roomName={roomName}
-          roomCode={rooms[roomName].config.roomCode}
-          roomAvatarUrl={rooms[roomName].config.roomAvatar}
-          roomSelected={handleRoomSelected}
-        />
-      );
-    });
+    roomCards = Object.keys(rooms).map((roomName) => (
+      <RoomCard
+        key={uuidv4()}
+        roomName={roomName}
+        roomCode={rooms[roomName].config.roomCode}
+        roomAvatarUrl={rooms[roomName].config.roomAvatar}
+        roomSelected={handleRoomSelected}
+      />
+    ));
   }
 
   // Default content

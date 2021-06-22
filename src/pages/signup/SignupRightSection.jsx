@@ -13,9 +13,9 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
+import { useMutation } from 'react-query';
 import grupoLogoTeal from '../../assets/grupoLogoTeal.svg';
 import GithubAuth from '../../components/githubAuth/GithubAuth';
-import { useMutation } from 'react-query';
 import { signupUser } from '../../api/auth';
 import {
   ERROR,
@@ -39,8 +39,8 @@ const SignupRightSection = () => {
   const { data, error, isLoading, isSuccess, isError } = signupMutation;
 
   // Function that's called once Auth component passes authData
-  const getAuthData = (authData) => {
-    setAuthData(authData);
+  const getAuthData = (aData) => {
+    setAuthData(aData);
     setShowPasswordPrompt(true);
   };
 
@@ -188,6 +188,7 @@ const SignupRightSection = () => {
         <GithubAuth text='Sign up with GitHub' getAuthData={getAuthData} />
         <Text fontSize='sm'>
           Already have a account{' '}
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <Link onClick={() => history.push('/login')}>Login now!</Link>
         </Text>
       </Stack>

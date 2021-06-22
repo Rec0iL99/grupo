@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 const getUserData = () => {
-  const token = localStorage.token;
+  const { token } = localStorage;
 
   // User Data object
   let user;

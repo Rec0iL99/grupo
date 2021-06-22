@@ -1,20 +1,19 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "extends": ["react-app"],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 12,
-    "sourceType": "module"
-  },
-  "plugins": ["react"],
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier"],
   "rules": {
+    "prettier/prettier": "error",
     "no-unused-vars": "warn",
-    "no-console": "warn",
-    "class-methods-use-this": "off"
+    "func-names": "off",
+    "object-shorthand": "off",
+    "class-methods-use-this": "off",
+    "react/prop-types": "off"
+  },
+  "globals": {
+    "localStorage": true,
+    "navigator": true,
+    "document": true,
+    "window": true,
+    "Headers": true
   }
 }

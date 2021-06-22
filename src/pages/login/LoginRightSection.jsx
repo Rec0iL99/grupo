@@ -9,9 +9,9 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
+import { useMutation } from 'react-query';
 import grupoLogoTeal from '../../assets/grupoLogoTeal.svg';
 import GithubAuth from '../../components/githubAuth/GithubAuth';
-import { useMutation } from 'react-query';
 import { loginUser } from '../../api/auth';
 import {
   LOGIN,
@@ -142,6 +142,7 @@ const LoginRightSection = () => {
         <GithubAuth text='Login with GitHub' getAuthData={getAuthData} />
         <Text fontSize='sm'>
           Not a Grupo user yet?{' '}
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <Link onClick={() => history.push('/signup')}>Sign up now!</Link>
         </Text>
       </Stack>
