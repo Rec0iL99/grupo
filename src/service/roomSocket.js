@@ -25,3 +25,21 @@ export const joinRoom = (socket, roomCode, cb) => {
     return cb(data, null);
   });
 };
+
+export const sendRoomChatMessage = (socket, roomName, chatMessage, cb) => {
+  if (!socket) return false;
+
+  socket.emit(
+    socketClientActions.CLIENT_ROOM_MESSAGE,
+    roomName,
+    chatMessage,
+    (data) => {
+      if (data) {
+        return cb(null, data);
+      }
+
+      // Send room chat message fail
+      return cb(data, null);
+    }
+  );
+};
