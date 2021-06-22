@@ -1,81 +1,81 @@
 import React, { useEffect, useState } from 'react';
 import RoomSelectSection from './RoomSelectSection';
 import Header from '../../components/header/Header';
-import { Flex, Spinner } from '@chakra-ui/react';
-import { connectToSocketServer } from '../../actions/socketActions';
-import { preCheckUser } from '../../actions/userActions';
+import { Flex } from '@chakra-ui/react';
+import SelectedRoom from './SelectedRoom';
+import { socketConnection } from '../../service/socket';
+import useSocket from '../../global-stores/useSocket';
+import useRooms from '../../global-stores/useRooms';
 import {
   createRoom,
   joinRoom,
-  newRoomMember,
-  newRoomMessage,
   sendRoomChatMessage,
-} from '../../actions/roomActions';
-import { connect } from 'react-redux';
-import SelectedRoom from './SelectedRoom';
-import { useHistory } from 'react-router-dom';
+  roomMemberListener,
+  roomMessageListener,
+} from '../../service/roomSocket';
 
-const Room = ({
-  userData,
-  socketData,
-  roomData,
-  createRoom,
-  joinRoom,
-  newRoomMember,
-  newRoomMessage,
-  sendRoomChatMessage,
-  connectToSocketServer,
-  preCheckUser,
-}) => {
-  const socket = socketData.socket;
-  const history = useHistory();
+const Room = () => {
+  const socket = useSocket((state) => state.socket);
+  const rooms = useRooms((state) => state.rooms);
+  const setSocket = useSocket((state) => state.setSocket);
+  const setRooms = useRooms((state) => state.setRooms);
+  const setRoomMessages = useRooms((state) => state.setRoomMessages);
+  const setRoomMembers = useRooms((state) => state.setRoomMembers);
 
   // Initializing intial room
-  const [selectedRoom, setSelectedRoom] = useState(
-    Object.keys(roomData.rooms)[0]
-  );
+  const [selectedRoom, setSelectedRoom] = useState(Object.keys(rooms)[0]);
 
   // Precheck before user sees anything
-  useEffect(() => {
-    if (localStorage.token) {
-      preCheckUser(history);
-    }
-  }, [preCheckUser, history]);
+  // useEffect(() => {
+  //   if (localStorage.token) {
+  //     preCheckUser(history);
+  //   }
+  // }, [preCheckUser, history]);
 
   // Connect to socket server if precheck successfully and localStorage has accessToken
   useEffect(() => {
     if (localStorage.token) {
-      connectToSocketServer();
+      socketConnection((error, data) => {
+        if (data) {
+          setSocket(data.socket);
+        }
+      });
     }
-  }, [connectToSocketServer]);
+  }, [setSocket]);
 
-  // Initializing newRoomMember listener
+  // Initializing room member and message listeners
   useEffect(() => {
-    if (socket !== null) {
-      newRoomMember(socket);
-    }
-  }, [socket, newRoomMember]);
-
-  // Initializing newRoomMessage listener
-  useEffect(() => {
-    if (socket !== null) {
-      newRoomMessage(socket);
-    }
-  }, [socket, newRoomMessage]);
+    roomMemberListener(socket, (error, data) => {
+      const { roomName, member } = data;
+      setRoomMembers(roomName, member);
+    });
+    roomMessageListener(socket, (error, data) => {
+      const { roomName, roomMessage } = data;
+      setRoomMessages(roomName, roomMessage);
+    });
+  }, [setRoomMembers, setRoomMessages, socket]);
 
   // Handle create room from roomSelectSection
   const handleCreateRoom = (roomName) => {
-    createRoom(socket, roomName);
+    createRoom(socket, roomName, (error, data) => {
+      setRooms(data);
+    });
   };
 
   // Handle join room from roomSelectSection
   const handleJoinRoom = (roomCode) => {
-    joinRoom(socket, roomCode);
+    joinRoom(socket, roomCode, (error, data) => {
+      setRooms(data);
+    });
   };
 
   // Handle send chat message when user presses enter key
   const handleSendChatMessage = (data) => {
-    sendRoomChatMessage(socket, data.roomName, data.chatMessage);
+    const { roomName, chatMessage } = data;
+
+    sendRoomChatMessage(socket, roomName, chatMessage, (error, data) => {
+      setRoomMessages(roomName, data);
+    });
   };
 
   // Handle onClick when user clicks on roomCard
@@ -83,55 +83,36 @@ const Room = ({
     setSelectedRoom(roomName);
   };
 
-  // Default content
-  let content = (
+  // if (userData.preCheckData.isLoading) {
+  //   return (
+  //     <Flex>
+  //       <Spinner color='teal' />
+  //     </Flex>
+  //   );
+  // }
+
+  return (
     <Flex>
       <Header />
       <RoomSelectSection
-        rooms={roomData.rooms}
+        rooms={rooms}
         sendCreateRoomRequest={handleCreateRoom}
         sendJoinRoomRequest={handleJoinRoom}
         sendRoomSelectedRequest={handleRoomSelected}
       />
       <SelectedRoom
-        numberOfRooms={Object.keys(roomData.rooms).length}
+        numberOfRooms={Object.keys(rooms).length}
         roomName={selectedRoom}
         roomMessageArray={
-          roomData.rooms[selectedRoom]
-            ? roomData.rooms[selectedRoom].messages
-            : null
+          rooms[selectedRoom] ? rooms[selectedRoom].messages : null
         }
         roomMembersArray={
-          roomData.rooms[selectedRoom]
-            ? roomData.rooms[selectedRoom].members
-            : null
+          rooms[selectedRoom] ? rooms[selectedRoom].members : null
         }
         sendChatMessageRequest={handleSendChatMessage}
       />
     </Flex>
   );
-
-  if (userData.preCheckData.isLoading) {
-    <Flex>
-      <Spinner color='teal' />
-    </Flex>;
-  }
-
-  return content;
 };
 
-const mapStateToProps = (state) => ({
-  userData: state.userData,
-  socketData: state.socketData,
-  roomData: state.roomData,
-});
-
-export default connect(mapStateToProps, {
-  preCheckUser,
-  connectToSocketServer,
-  createRoom,
-  joinRoom,
-  newRoomMember,
-  newRoomMessage,
-  sendRoomChatMessage,
-})(Room);
+export default Room;

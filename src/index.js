@@ -3,12 +3,17 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import './index.scss';
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider resetCSS={true}>
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')
