@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import RoomSelectSection from './RoomSelectSection';
 import Header from '../../components/header/Header';
-import { Flex, Spinner } from '@chakra-ui/react';
-import { connectToSocketServer } from '../../actions/socketActions';
-import { preCheckUser } from '../../actions/userActions';
-import { newRoomMember, newRoomMessage } from '../../actions/roomActions';
-import { connect } from 'react-redux';
+import { Flex } from '@chakra-ui/react';
 import SelectedRoom from './SelectedRoom';
 import { socketConnection } from '../../service/socket';
 import useSocket from '../../global-stores/useSocket';
@@ -18,15 +14,7 @@ import {
   roomMessageListener,
 } from '../../service/roomSocket';
 
-const Room = ({
-  userData,
-  socketData,
-  roomData,
-  newRoomMember,
-  newRoomMessage,
-  connectToSocketServer,
-  preCheckUser,
-}) => {
+const Room = () => {
   const socket = useSocket((state) => state.socket);
   const rooms = useRooms((state) => state.rooms);
   const setSocket = useSocket((state) => state.setSocket);
@@ -35,9 +23,7 @@ const Room = ({
   const setRoomMembers = useRooms((state) => state.setRoomMembers);
 
   // Initializing intial room
-  const [selectedRoom, setSelectedRoom] = useState(
-    Object.keys(roomData.rooms)[0]
-  );
+  const [selectedRoom, setSelectedRoom] = useState(Object.keys(rooms)[0]);
 
   // Precheck before user sees anything
   // useEffect(() => {
@@ -97,13 +83,13 @@ const Room = ({
     setSelectedRoom(roomName);
   };
 
-  if (userData.preCheckData.isLoading) {
-    return (
-      <Flex>
-        <Spinner color='teal' />
-      </Flex>
-    );
-  }
+  // if (userData.preCheckData.isLoading) {
+  //   return (
+  //     <Flex>
+  //       <Spinner color='teal' />
+  //     </Flex>
+  //   );
+  // }
 
   return (
     <Flex>
@@ -129,15 +115,4 @@ const Room = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  userData: state.userData,
-  socketData: state.socketData,
-  roomData: state.roomData,
-});
-
-export default connect(mapStateToProps, {
-  preCheckUser,
-  connectToSocketServer,
-  newRoomMember,
-  newRoomMessage,
-})(Room);
+export default Room;

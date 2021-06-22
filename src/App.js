@@ -6,8 +6,6 @@ import {
   useHistory,
 } from 'react-router-dom';
 import routes from './routes';
-import { Provider } from 'react-redux';
-import store from './store';
 import isAuthenticated from './utils/isAuthenticated';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
@@ -49,17 +47,15 @@ const RenderRoute = (route) => {
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <div className='App'>
-        <Router>
-          <Switch>
-            {routes.map((route, index) => (
-              <RenderRoute {...route} key={index} />
-            ))}
-          </Switch>
-        </Router>
-      </div>
-    </Provider>
+    <div className='App'>
+      <Router>
+        <Switch>
+          {routes.map((route, index) => (
+            <RenderRoute {...route} key={index} />
+          ))}
+        </Switch>
+      </Router>
+    </div>
   );
 };
 
