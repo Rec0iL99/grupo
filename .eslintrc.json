@@ -8,5 +8,12 @@
     "object-shorthand": "off",
     "class-methods-use-this": "off",
     "react/prop-types": "off"
+  },
+  "globals": {
+    "localStorage": true,
+    "navigator": true,
+    "document": true,
+    "window": true,
+    "Headers": true
   }
 }

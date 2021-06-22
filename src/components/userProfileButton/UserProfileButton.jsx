@@ -1,7 +1,6 @@
 import React from 'react';
-import { Image } from '@chakra-ui/react';
-import getUserData from '../../utils/getUserData';
 import {
+  Image,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -12,6 +11,7 @@ import {
   Text,
   Flex,
 } from '@chakra-ui/react';
+import getUserData from '../../utils/getUserData';
 import Logout from './Logout';
 
 const UserProfileButton = () => {
@@ -26,7 +26,7 @@ const UserProfileButton = () => {
           boxSize='45px'
           src={user.profilePic}
           alt={user.username}
-        ></Image>
+        />
       </PopoverTrigger>
       <PopoverContent>
         <PopoverCloseButton />

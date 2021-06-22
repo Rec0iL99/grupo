@@ -9,8 +9,8 @@ import {
   ModalBody,
   ModalCloseButton,
   Input,
+  useDisclosure,
 } from '@chakra-ui/react';
-import { useDisclosure } from '@chakra-ui/react';
 
 const CustomModal = (props) => {
   // Destructing the props object
@@ -40,7 +40,7 @@ const CustomModal = (props) => {
         colorScheme='teal'
         variant='outline'
         marginTop='10px'
-        isFullWidth={true}
+        isFullWidth
         onClick={onOpen}
       >
         {buttonText}
