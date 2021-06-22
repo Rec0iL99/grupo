@@ -1,4 +1,4 @@
-import { socketClientActions } from '../utils/constants';
+import { socketClientActions, socketServerActions } from '../utils/constants';
 
 export const createRoom = (socket, roomName, cb) => {
   if (!socket) return false;
@@ -42,4 +42,34 @@ export const sendRoomChatMessage = (socket, roomName, chatMessage, cb) => {
       return cb(data, null);
     }
   );
+};
+
+export const roomMemberListener = (socket, cb) => {
+  if (!socket) return false;
+
+  socket
+    .off(socketServerActions.SERVER_NEW_ROOM_MEMBER)
+    .on(socketServerActions.SERVER_NEW_ROOM_MEMBER, (data) => {
+      if (data) {
+        return cb(null, data);
+      }
+
+      // Room member listening fail
+      return cb(data, null);
+    });
+};
+
+export const roomMessageListener = (socket, cb) => {
+  if (!socket) return false;
+
+  socket
+    .off(socketServerActions.SERVER_NEW_ROOM_MESSAGE)
+    .on(socketServerActions.SERVER_NEW_ROOM_MESSAGE, (data) => {
+      if (data) {
+        return cb(null, data);
+      }
+
+      // Room message listening fail
+      return cb(data, null);
+    });
 };

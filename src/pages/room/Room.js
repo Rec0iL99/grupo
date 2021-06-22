@@ -14,6 +14,8 @@ import {
   createRoom,
   joinRoom,
   sendRoomChatMessage,
+  roomMemberListener,
+  roomMessageListener,
 } from '../../service/roomSocket';
 
 const Room = ({
@@ -29,6 +31,8 @@ const Room = ({
   const rooms = useRooms((state) => state.rooms);
   const setSocket = useSocket((state) => state.setSocket);
   const setRooms = useRooms((state) => state.setRooms);
+  const setRoomMessages = useRooms((state) => state.setRoomMessages);
+  const setRoomMembers = useRooms((state) => state.setRoomMembers);
 
   // Initializing intial room
   const [selectedRoom, setSelectedRoom] = useState(
@@ -53,19 +57,17 @@ const Room = ({
     }
   }, [setSocket]);
 
-  // Initializing newRoomMember listener
+  // Initializing room member and message listeners
   useEffect(() => {
-    if (socket !== null) {
-      newRoomMember(socket);
-    }
-  }, [socket, newRoomMember]);
-
-  // Initializing newRoomMessage listener
-  useEffect(() => {
-    if (socket !== null) {
-      newRoomMessage(socket);
-    }
-  }, [socket, newRoomMessage]);
+    roomMemberListener(socket, (error, data) => {
+      const { roomName, member } = data;
+      setRoomMembers(roomName, member);
+    });
+    roomMessageListener(socket, (error, data) => {
+      const { roomName, roomMessage } = data;
+      setRoomMessages(roomName, roomMessage);
+    });
+  }, [setRoomMembers, setRoomMessages, socket]);
 
   // Handle create room from roomSelectSection
   const handleCreateRoom = (roomName) => {
@@ -83,15 +85,11 @@ const Room = ({
 
   // Handle send chat message when user presses enter key
   const handleSendChatMessage = (data) => {
-    sendRoomChatMessage(
-      socket,
-      data.roomName,
-      data.chatMessage,
-      (error, data) => {
-        console.log(error);
-        console.log(data);
-      }
-    );
+    const { roomName, chatMessage } = data;
+
+    sendRoomChatMessage(socket, roomName, chatMessage, (error, data) => {
+      setRoomMessages(roomName, data);
+    });
   };
 
   // Handle onClick when user clicks on roomCard
