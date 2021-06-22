@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Flex } from '@chakra-ui/react';
 import RoomSelectSection from './RoomSelectSection';
 import Header from '../../components/header/Header';
-import { Flex } from '@chakra-ui/react';
 import SelectedRoom from './SelectedRoom';
 import { socketConnection } from '../../service/socket';
 import useSocket from '../../global-stores/useSocket';
@@ -70,8 +70,8 @@ const Room = () => {
   };
 
   // Handle send chat message when user presses enter key
-  const handleSendChatMessage = (data) => {
-    const { roomName, chatMessage } = data;
+  const handleSendChatMessage = (chatMessageData) => {
+    const { roomName, chatMessage } = chatMessageData;
 
     sendRoomChatMessage(socket, roomName, chatMessage, (error, data) => {
       setRoomMessages(roomName, data);
