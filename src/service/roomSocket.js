@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { socketClientActions, socketServerActions } from '../utils/constants';
 
 export const createRoom = (socket, roomName, cb) => {

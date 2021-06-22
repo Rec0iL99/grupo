@@ -5,6 +5,7 @@ import {
   Switch,
   useHistory,
 } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import routes from './routes';
 import isAuthenticated from './utils/isAuthenticated';
 import Login from './pages/login/Login';
@@ -20,43 +21,42 @@ const componentRegistry = {
 
 const RenderRoute = (route) => {
   const history = useHistory();
+  const { title, needsAuth, component, path } = route;
 
   // Setting titles for all pages
-  document.title = route.title || 'Grupo';
+  document.title = title || 'Grupo';
 
   // If route needs auth and if user is not authenticated then prompt user to login
-  if (route.needsAuth && !isAuthenticated()) {
+  if (needsAuth && !isAuthenticated()) {
     history.push('/login');
   }
 
   // If user visits login even after login then push user to main chat page
-  if (route.component === 'Login' && isAuthenticated()) {
+  if (component === 'Login' && isAuthenticated()) {
     history.push('/');
-  } else if (route.component === 'Signup' && isAuthenticated()) {
+  } else if (component === 'Signup' && isAuthenticated()) {
     history.push('/');
   }
 
-  return (
-    <Route
-      exact
-      path={route.path}
-      component={componentRegistry[route.component]}
-    />
-  );
+  return <Route exact path={path} component={componentRegistry[component]} />;
 };
 
-const App = () => {
-  return (
-    <div className='App'>
-      <Router>
-        <Switch>
-          {routes.map((route, index) => (
-            <RenderRoute {...route} key={index} />
-          ))}
-        </Switch>
-      </Router>
-    </div>
-  );
-};
+const App = () => (
+  <div className='App'>
+    <Router>
+      <Switch>
+        {routes.map((route) => (
+          <RenderRoute
+            key={uuidv4()}
+            title={route.title}
+            needsAuth={route.needsAuth}
+            component={route.component}
+            path={route.path}
+          />
+        ))}
+      </Switch>
+    </Router>
+  </div>
+);
 
 export default App;

@@ -10,16 +10,16 @@ export default (history = null) => {
   const client = process.env.REACT_APP_CLIENT;
   const server = process.env.REACT_APP_SERVER;
 
-  let headers = {};
+  const headers = {};
 
   if (localStorage.token) {
     headers['Content-Type'] = 'application/json';
-    headers['Origin'] = client;
+    headers.Origin = client;
     headers['Access-Control-Allow-Credentials'] = true;
     headers.Authorization = `Bearer ${localStorage.token}`;
   } else {
     headers['Content-Type'] = 'application/json';
-    headers['Origin'] = client;
+    headers.Origin = client;
     headers['Access-Control-Allow-Credentials'] = true;
   }
 
@@ -31,7 +31,7 @@ export default (history = null) => {
 
   loggedInAxios.interceptors.response.use(
     (response) =>
-      new Promise((resolve, reject) => {
+      new Promise((resolve) => {
         resolve(response);
       }),
     (error) => {
@@ -53,11 +53,10 @@ export default (history = null) => {
         return new Promise((resolve, reject) => {
           reject(error);
         });
-      } else {
-        return new Promise((resolve, reject) => {
-          reject(error);
-        });
       }
+      return new Promise((resolve, reject) => {
+        reject(error);
+      });
     }
   );
 
